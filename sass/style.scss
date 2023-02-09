@@ -65,8 +65,8 @@ html {
         @include d.configurationLabel (v.$colorTextIni, 1.1rem);
         text-shadow: v.$textShadow1;
         margin: 2% auto;
-
       }
+      
       &>.classSongChose {
         @include l.layoutFlexboxRowCenter;
         margin: 0% auto;
