@@ -3,7 +3,11 @@
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
 //  1.- HTMLElement (fileSong, audioElement, canvasElement, playPauseButton, seekbar and volumenBar)
-const fileSong = document.querySelector("#songChose")
+const songSelect = document.querySelector('.selectSong')
+const optionElement = document.querySelectorAll('option')
+const buttonSelectSong = document.querySelector('.buttonSelect')
+// const fileSong = document.querySelector("#songChose")
+let fileSong = "./assets/mp3/John Lennon 'Imagine'.mp3"
 const audioElement = document.querySelector('.audioController');
 const canvasElement = document.querySelector('.canvas');
 const playPauseButton = document.querySelector('.playPause');
@@ -54,10 +58,18 @@ function togglePlayPause() {
 
 //  2.-  Event "change" in the input type="file" (fileSong) (change => ev.target.files[0].name --> src of audioElement)
 audioElement.setAttribute('src', `./assets/mp3/John Lennon 'Imagine'.mp3`)
-fileSong.addEventListener('change', (ev) => {
-    if (ev.target.files[0]) {
-        audioElement.setAttribute('src', `./assets/mp3/${ev.target.files[0].name}`);
-    }
+// fileSong.addEventListener('change', (ev) => {
+//     if (ev.target.files[0]) {
+//         audioElement.setAttribute('src', `./assets/mp3/${ev.target.files[0].name}`);
+//     }
+// })
+
+songSelect.addEventListener('change', (ev) => {
+    fileSong = optionElement[ev.target.selectedIndex].value
+})
+
+buttonSelectSong.addEventListener('click', () => {
+    audioElement.setAttribute('src', fileSong);
 })
 
 //  3.- Events in the audioElement (timeupdate, ended and canplay)
@@ -103,7 +115,7 @@ source.connect(analyser);
 //  C.-  Connect the destination of audio with the analyser
 analyser.connect(audioCtx.destination);
 
-//  D.-  Definitoion de buffer of audio and the dataArray
+//  D.-  Definition de buffer of audio and the dataArray
 const bufferLength = analyser.frequencyBinCount;
 const dataArray = new Uint8Array(bufferLength);
 
@@ -113,12 +125,12 @@ function drawSound() {
     canvasCtx.fillStyle = 'rgb(0, 0, 0)';
     canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
 
-    const barWidth = (WIDTH / bufferLength) * 1.1;
+    const barWidth = (WIDTH / bufferLength) * 2.3;
     let barHeight;
     let x = 0;
 
     for (let i = 0; i < bufferLength; i++) {
-        barHeight = dataArray[i] / 1.18;
+        barHeight = dataArray[i] / 0.82;
 
         //  Colors of bars
         const c = i * 1.1 / bufferLength;

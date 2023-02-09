@@ -43,12 +43,74 @@ html {
 
   &>.contTop {
     @include l.layoutFlexboxRowCenter;
+    justify-content: flex-start;
     @include n.neuMorphismus3;
     width: 60%;
     height: auto;
     padding: 2%;
     margin: 0% auto;
     margin-top: 5%;
+
+    &>.contSelectSong {
+      @include l.layoutFlexboxColumCenter;
+      @include n.neuMorphismus4;
+      width: 36%;
+      height: 6rem;
+      padding: 0%;
+      margin: 0% 2%;
+      border: 2px solid v.$backgroundColorIni;
+      border-radius: 12px;
+      background-color: v.$backgroundColorIniT2;
+
+      &>label {
+        @include d.configurationLabel (v.$colorTextIni, 1.1rem);
+        text-shadow: v.$textShadow1;
+        margin: 2% auto;
+
+      }
+
+      &>.contSelectButton {
+        @include l.layoutFlexboxRowCenter;
+        align-items: flex-start;
+        justify-content: space-between;
+        width: 79%;
+        gap: 5%;
+
+        &>.selectSong {
+          @include l.layoutFlexboxRowCenter;
+          height: 3.8vh;
+          width: 12rem;
+          margin: 0.5% auto;
+          padding: 0.5% auto;
+          @include d.configurationText1 (v.$colorRedNeu, 0.75rem);
+          font-weight: 600;
+  
+          &>option {
+            @include d.configurationText1 (v.$backgroundColorDunkelGray4, 0.7rem);
+            margin: 1% auto;
+            padding: 1% auto;
+          }
+        }
+
+        &>.buttonSelect {
+          @include d.buttonTypeNeuMorphismus2 (v.$colorNavy);
+          @include d.configurationText2 (v.$colorDunkel6, 0.75rem);
+          padding: 3% 6%;
+          margin: 0% auto;
+          transition: all 0.35s ease;
+          cursor: pointer;
+
+          &:hover {
+            background: linear-gradient(315deg, #8f8f8f, #414141);
+            box-shadow: -2px -2px 5px #545454,
+              1px 1px 4px #bababa;
+            font-weight: bolder;
+            color: v.$colorbackgroudMy;
+            transform: scale(0.92);
+          }
+        }
+      }
+    }
 
     &>.contFileChoose {
       @include l.layoutFlexboxColumCenter;
@@ -66,7 +128,7 @@ html {
         text-shadow: v.$textShadow1;
         margin: 2% auto;
       }
-      
+
       &>.classSongChose {
         @include l.layoutFlexboxRowCenter;
         margin: 0% auto;
