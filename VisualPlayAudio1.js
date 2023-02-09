@@ -64,13 +64,13 @@ function draw() {
     let x = 0;
 
     for (let i = 0; i < bufferLength; i++) {
-        barHeight = dataArray[i] / 1.1;
+        barHeight = dataArray[i] / 1.05;
 
         //  Colors of bars
         const c = i / bufferLength;
         const redColor = 250;
-        const greenColor = 250 * 3.8 * c;
-        const blueColor = barHeight + 28 * c;
+        const greenColor = 250 * 4 * c;
+        const blueColor = barHeight + 30 * c;
         canvasCtx.fillStyle = `rgb(${redColor}, ${greenColor}, ${blueColor})`;
         canvasCtx.fillRect(x, HEIGHT - barHeight, barWidth, barHeight);
 
