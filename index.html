@@ -1,12 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visual Play Music 1</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visual Play Music 1</title>
+  <link rel="stylesheet" href="./CSS/style.css">
 </head>
+
 <body>
-    
+  <div class="contCentral">
+    <div class="contTop">
+      <div class="contFileChoose">
+        <label for="songChose">Choose a song:</label>
+        <input type="file" class="classSongChose" id="songChose" name="song" accept="audio/*" >
+      </div>
+      <audio controls class="audioController" src="./assets/mp3/John Lennon 'Imagine'.mp3" type="audio/mp3"></audio>
+    </div>
+
+    <div class="audioPlayer">
+      <canvas class="canvas" height="100" width="480"></canvas>
+      <div class="controls">
+        <div class="contButton">
+          <button class="playPause">
+            Play
+          </button>
+        </div>
+
+        <input type="range" class="seekbar"></input>
+        <div class="contVolumen">
+          <span class="materialIcons colorSpan">
+            Down
+          </span>
+          <input type="range" class="volume">
+          <span class="materialIcons colorSpan">
+            Up
+          </span></input>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./VisualPlayAudio1.js"></script>
 </body>
+
 </html>
