@@ -35,7 +35,7 @@ html {
   height: 100vh;
   perspective: 1000px;
   transform-style: preserve-3d;
-  gap: 5%;
+  gap: 1%;
 
   background: v.$backgroundColorHellGrayT;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='30' viewBox='0 0 1000 120'%3E%3Cg fill='none' stroke='%23222222' stroke-width='10' %3E%3Cpath d='M-500 75c0 0 125-30 250-30S0 75 0 75s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 45c0 0 125-30 250-30S0 45 0 45s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 105c0 0 125-30 250-30S0 105 0 105s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 15c0 0 125-30 250-30S0 15 0 15s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500-15c0 0 125-30 250-30S0-15 0-15s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 135c0 0 125-30 250-30S0 135 0 135s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3C/g%3E%3C/svg%3E");
@@ -84,7 +84,7 @@ html {
           padding: 0.5% auto;
           @include d.configurationText1 (v.$colorRedNeu, 0.75rem);
           font-weight: 600;
-  
+
           &>option {
             @include d.configurationText1 (v.$backgroundColorDunkelGray4, 0.7rem);
             margin: 1% auto;
@@ -151,10 +151,11 @@ html {
 
   &>.audioPlayer {
     @include l.layoutFlexboxColumCenter;
+    align-items: flex-start;
     @include n.neuMorphismus4;
-    height: 40vh;
+    height: 45vh;
     width: 60%;
-    padding: 2%;
+    padding: 1%;
     margin: 0% auto;
     border: 1px solid v.$colorHellCardGlassBorder;
     border-radius: 19px;
@@ -163,37 +164,43 @@ html {
       @include l.layoutFlexboxRowCenter;
       @include g.boxShadowGlassMorphismus4;
       width: 100%;
-      height: 390px;
+      height: 260px;
       padding: 0%;
-      margin: 1% auto;
-      margin-top: 4%;
-      border: 1px solid v.$backgroundColorHellGrayT;
-      border-radius: 12px;
-      background-color: transparent;
+      margin: 0% auto;
+      border: 2px solid v.$backgroundColorHellGrayT;
+      border-radius: 9px;
+      background-color: v.$backgroundColorBlack;
     }
 
     &>.controls {
       @include l.layoutFlexboxRowCenter;
       justify-content: space-between;
-      @include n.neuMorphismus6;
-      width: 80%;
-      height: 4.4rem;
+      @include n.neuMorphismus3;
+      height: 4.6rem;
       padding: 1%;
-      margin: 0% auto;
-      border: 2px solid v.$backgroundColorHellGrayT3;
-      border-radius: 12px;
+      margin: 1% auto;
+      border: 1px solid v.$backgroundColorHellGrayT3;
+      border-radius: 9px;
+      gap: 3%;
 
       &>.contButton {
         @include l.layoutFlexboxRowCenter;
+        width: auto;
+        height: 3rem;
         margin: 0% auto;
+        margin-left: 2%;
         padding: 0%;
 
         &>.playPause {
           @include d.buttonTypeNeuMorphismus2 (v.$colorNavy);
-          @include d.configurationText2 (v.$colorDunkel6, 0.9rem);
-          padding: 4% 8%;
+          @include d.configurationText2 (v.$colorDunkel6, 0.75rem);
+          text-align: center;
+          height: 2.9rem;
+          width: 4.6rem;
+          padding: 1% 2%;
           margin: 0% auto;
           transition: all 0.35s ease;
+          border: 1px solid v.$backgroundColorHellGrayT3;
           cursor: pointer;
 
           &:hover {
@@ -207,65 +214,145 @@ html {
         }
       }
 
-      &>.seekbar {
-        @include n.neuMorphismus2;
-        -webkit-appearance: none;
-        width: 16rem;
-        padding: 1%;
-        margin: 0% 2%;
-        border: 2px solid v.$backgroundColorHellGrayT3;
+      &>.CurrentSeekBar {
+        @include l.layoutFlexboxRowCenter;
+        @include n.neuMorphismus4;
+        width: 3.4rem;
+        height: 3rem;
+        @include d.configurationLabel (v.$backgroundColorDunkelGray2, 0.65rem);
         border-radius: 6px;
+        padding: 0% auto;
+        margin: 0% auto;
+        margin-right: 2%;
+        margin-right: -2%;
+      }
 
-        &::-webkit-slider-thumb {
+      &>.contSeekBar {
+        @include l.layoutFlexboxRowCenter;
+        justify-content: space-between;
+        @include n.neuMorphismus4;
+        border-radius: 6px;
+        width: 96%;
+        height: 3rem;
+        padding: 1% auto;
+        margin: 0% auto;
+
+        &>.spanSeekBar {
+          @include l.layoutFlexboxRowCenter;
+          @include d.configurationLabel (v.$backgroundColorDunkelGray4, 0.6rem);
+          padding: 0% auto;
+          margin: 0% auto;
+          width: 3rem;
+        }
+
+        &>.seekBar {
+          @include l.layoutFlexboxRowCenter;
+          @include n.neuMorphismus6;
           -webkit-appearance: none;
-          height: 20px;
-          width: 10px;
-          background: v.$colorDunkelGreen;
-          cursor: pointer;
-        }
+          width: 90%;
+          height: 3rem;
+          padding: 0%;
+          margin: 0% auto;
+          border-radius: 3px;
+          overflow: hidden;
 
-        &:focus {
-          outline: none;
-        }
+          &::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 3rem;
+            width: 0.2rem;
+            background: v.$colorRedNeu;
+            border-radius: 9px;
+            outline: 1px solid v.$colorRedNeu3;
+            outline-offset: 2px;
+            cursor: pointer;
+          }
 
-        &::-moz-range-thumb {
-          height: 20px;
-          width: 10px;
-          background: v.$colorDunkelGreen;
-          cursor: pointer;
-        }
+          &:focus {
+            outline: none;
+          }
 
-        &::-webkit-slider-runnable-track {
-          width: 100%;
-          height: 20px;
-          cursor: pointer;
-          background: #B0B0B0;
-        }
+          &::-moz-range-thumb {
+            height: 3rem;
+            width: 90%;
+            background: v.$backgroundColorDunkelBlack2;
+            cursor: pointer;
+          }
 
-        &:focus::-webkit-slider-runnable-track {
-          background: #B0B0B0;
-        }
+          &::-webkit-slider-runnable-track {
+            @include n.neuMorphismus6;
+            border-radius: 3px;
+            width: 90%;
+            height: 3rem;
+            cursor: pointer;
+            background: v.$backgroundColorDunkelBlack2;
+          }
 
-        &::-moz-range-track {
-          width: 100%;
-          height: 20px;
-          cursor: pointer;
-          background: #B0B0B0;
+          &:focus::-webkit-slider-runnable-track {
+            background: v.$backgroundColorDunkelBlack2;
+          }
+
+          &::-moz-range-track {
+            width: 90%;
+            height: 3rem;
+            cursor: pointer;
+            background: v.$backgroundColorDunkelBlack2;
+          }
         }
       }
 
       &>.contVolumen {
         @include l.layoutFlexboxRowCenter;
         justify-content: space-between;
-        @include n.neuMorphismus6;
-        padding: 1%;
+        @include n.neuMorphismus4;
+        border-radius: 6px;
+        height: 3rem;
+        padding: 1% auto;
         margin: 0% auto;
 
-        &>.materialIcons {
-          @include l.layoutFlexboxRowCenter;
-          @include d.configurationLabel (v.$colorDunkel0, 1rem);
-          margin: 0% 0.5%;
-          width: auto;
+        &>.mutedButton {
+          @include d.buttonTypeNeuMorphismus2 (v.$colorNavy);
+          @include d.configurationText2 (v.$colorDunkel6, 0.65rem);
+          text-align: center;
+          height: 2.8rem;
+          width: 3.2rem;
+          padding: 0.3%;
+          margin: 1% 1.5%;
+          margin-right: 6%;
+          transition: all 0.35s ease;
+          border: 1px solid v.$backgroundColorHellGrayT3;
+          cursor: pointer;
+
+          &:hover {
+            background: linear-gradient(315deg, #8f8f8f, #414141);
+            box-shadow: -2px -2px 5px #545454,
+              1px 1px 4px #bababa;
+            font-weight: bolder;
+            color: v.$colorbackgroudMy;
+            transform: scale(0.92);
+          }
+        }
+
+        &>.volumenButton {
+          @include d.buttonTypeNeuMorphismus2 (v.$colorNavy);
+          @include d.configurationText2 (v.$colorDunkel6, 0.6rem);
+          text-align: center;
+          height: 2.8rem;
+          width: 2rem;
+          padding: 0.2%;
+          margin: 0.3%;
+          margin-right: 0.6%;
+          transition: all 0.35s ease;
+          border: 1px solid v.$backgroundColorHellGrayT3;
+          cursor: pointer;
+
+          &:hover {
+            background: linear-gradient(315deg, #8f8f8f, #414141);
+            box-shadow: -2px -2px 5px #545454,
+              1px 1px 4px #bababa;
+            font-weight: bolder;
+            color: v.$colorbackgroudMy;
+            transform: scale(0.92);
+          }
         }
 
         &>.colorSpan {
@@ -273,52 +360,124 @@ html {
         }
 
         &>.volume {
+          @include l.layoutFlexboxRowCenter;
+          @include g.GlassMorphismus1;
+          background-color: v.$colorHellCardGlass;
           -webkit-appearance: none;
-          width: 100px;
-          background: transparent;
+          width: 86%;
+          height: 2.8rem;
+          padding: 0% auto;
+          margin: 0% 1.2%;
+          border: 2px solid v.$colorHellCardGlassBorder;
+          border-radius: 3px;
+          overflow: hidden;
 
           &::-webkit-slider-thumb {
             -webkit-appearance: none;
+            height: 2.8rem;
+            width: 0.2rem;
+            background: v.$colorGreenHell2;
+            border-radius: 9px;
+            outline: 1px solid v.$colorGreenHellT;
+            outline-offset: 2px;
+            cursor: pointer;
           }
 
           &:focus {
             outline: none;
           }
 
-          &::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            height: 10px;
-            width: 10px;
-            background: #222;
-            cursor: pointer;
-          }
-
           &::-moz-range-thumb {
-            height: 10px;
-            width: 10px;
-            background: #222;
+            height: 2.8rem;
+            width: 86%;
+            ;
+            background-color: v.$colorHellCardGlass;
             cursor: pointer;
           }
 
           &::-webkit-slider-runnable-track {
-            width: 100%;
-            height: 10px;
+            @include g.GlassMorphismus1;
+            border-radius: 3px;
+            width: 86%;
+            height: 2.8rem;
             cursor: pointer;
-            background: #10AEF5;
+            background-color: v.$colorHellCardGlass;
           }
 
           &:focus::-webkit-slider-runnable-track {
-            background: #10AEF5;
+            background-color: v.$colorHellCardGlass;
           }
 
           &::-moz-range-track {
-            width: 100%;
-            height: 10px;
+            width: 86%;
+            height: 2.8rem;
             cursor: pointer;
-            background: #10AEF5;
+            background-color: v.$colorHellCardGlass;
           }
         }
       }
     }
+  }
+}
+
+.material-symbols-outlined {
+  transform: scale(1.1);
+  font-weight: normal;
+}
+
+.play {
+  transform: scale(1.6);
+  color: v.$colorDunkelGreen;
+}
+.pause {
+  transform: scale(1.6);
+  color: v.$colorTextIni;
+}
+.replay {
+  transform: scale(1.6);
+  color: v.$colorTextIni;
+}
+
+.volume_muted {
+  @extend .material-symbols-outlined;
+  transform: scale(1.9);
+  color: v.$colorRedNeu;
+  font-weight: normal;
+  transition: all 0.35s ease;
+
+  &:hover,
+  &:focus {
+    color: v.$colorGreenHell2;
+    transform: scale(2);
+    font-weight: 400;
+  }
+}
+
+.volume_Notmuted {
+  @extend .material-symbols-outlined;
+  transform: scale(1.9);
+  font-weight: normal;
+  transition: all 0.35s ease;
+  color: v.$backgroundColorDunkelBlack2;
+
+  &:hover,
+  &:focus {
+    color: v.$colorRedNeu;
+    transform: scale(2);
+    font-weight: 400;
+  }
+}
+
+.volume_changed {
+  @extend .material-symbols-outlined;
+  color: v.$backgroundColorDunkelGray4;
+  font-weight: 300;
+  transition: all 0.35s ease;
+
+  &:hover,
+  &:focus {
+    color: v.$colorGrayHell;
+    transform: scale(1.15);
+    font-weight: 400;
   }
 }

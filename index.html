@@ -6,63 +6,85 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Visual Play Music 1</title>
+  <link rel="icon" href="data:;base64,=">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <link rel="stylesheet" href="./CSS/style.css">
 </head>
 
 <body>
   <div class="contCentral">
     <div class="contTop">
-      <!-- <div class="contFileChoose">
-        <label for="songChose">Choose a song:</label>
-        <input type="file" class="classSongChose" id="songChose" name="song" accept="audio/*" >
-      </div> -->
       <div class="contSelectSong">
         <label for="songChose">Choose a song:</label>
         <div class="contSelectButton">
-          <select name="select" class="selectSong" >
+          <select name="select" class="selectSong">
             <option value="./assets/mp3/John Lennon 'Imagine'.mp3" selected>Image</option>
             <option value="./assets/mp3/The Beatles - Revolver - 01 Taxman.mp3">Taxman</option>
             <option value="./assets/mp3/The Beatles - Revolver - 02 Eleanor Rigby.mp3">Eleanor Rigby</option>
             <option value="./assets/mp3/The Beatles - Revolver - 03 I'm Only Sleeping.mp3">I'm Only Sleeping</option>
             <option value="./assets/mp3/The Beatles - Revolver - 04 Love You To.mp3">Love You To</option>
-            <option value="./assets/mp3/The Beatles - Revolver - 05 Here, There And Everywhere.mp3">Here, There And Everywhere</option>
+            <option value="./assets/mp3/The Beatles - Revolver - 05 Here, There And Everywhere.mp3">Here, There And
+              Everywhere</option>
             <option value="./assets/mp3/The Beatles - Revolver - 06 Yellow Submarine.mp3">Yellow Submarine</option>
             <option value="./assets/mp3/The Beatles - Revolver - 07 She Said She Said.mp3">She Said She Said</option>
             <option value="./assets/mp3/The Beatles - Revolver - 08 Good Day Sunshine.mp3">Good Day Sunshine</option>
-            <option value="./assets/mp3/The Beatles - Revolver - 09 And Your Bird Can Sing.mp3">And Your Bird Can Sing</option>
+            <option value="./assets/mp3/The Beatles - Revolver - 09 And Your Bird Can Sing.mp3">And Your Bird Can Sing
+            </option>
             <option value="./assets/mp3/The Beatles - Revolver - 10 For No One.mp3">For No One</option>
             <option value="./assets/mp3/The Beatles - Revolver - 11 Doctor Robert.mp3">Doctor Robert</option>
             <option value="./assets/mp3/The Beatles - Revolver - 12 I Want To Tell You.mp3">I Want To Tell You</option>
-            <option value="./assets/mp3/The Beatles - Revolver - 13 Got To Get You Into My Life.mp3">Got To Get You Into My Life</option>
-            <option value="./assets/mp3/The Beatles - Revolver - 14 Tomorrow Newer Knows.mp3">Tomorrow Newer Knows</option>
-            <option value="./assets/albums_mp3/18 Others/Don't Let Me Down (Remastered 2009) (128 kbps).mp3">Don't Let Me Down</option>
-            <option value="./assets/albums_mp3/18 Others/Lady Madonna (Remastered 2015) (128 kbps).mp3">Lady Madonna</option>
-            <option value="./assets/albums_mp3/9 Magical Mystery Tour/The Beatles - Magical Mystery Tour - 11 All You Need Is Love.mp3">All You Need Is Love</option>
+            <option value="./assets/mp3/The Beatles - Revolver - 13 Got To Get You Into My Life.mp3">Got To Get You Into
+              My Life</option>
+            <option value="./assets/mp3/The Beatles - Revolver - 14 Tomorrow Newer Knows.mp3">Tomorrow Newer Knows
+            </option>
+            <option value="./assets/albums_mp3/18 Others/Don't Let Me Down (Remastered 2009) (128 kbps).mp3">Don't Let
+              Me Down</option>
+            <option value="./assets/albums_mp3/18 Others/Lady Madonna (Remastered 2015) (128 kbps).mp3">Lady Madonna
+            </option>
+            <option
+              value="./assets/albums_mp3/9 Magical Mystery Tour/The Beatles - Magical Mystery Tour - 11 All You Need Is Love.mp3">
+              All You Need Is Love</option>
           </select>
           <button type="submit" class="buttonSelect">Select</button>
         </div>
       </div>
-      <audio controls class="audioController" src="./assets/mp3/John Lennon 'Imagine'.mp3" type="audio/mp3"></audio>
     </div>
 
     <div class="audioPlayer">
-      <canvas class="canvas" height="100" width="480"></canvas>
+      <canvas class="canvas" height="260px" width="540px"></canvas>
       <div class="controls">
         <div class="contButton">
           <button class="playPause">
-            Play
+            <span class="material-symbols-outlined play">
+              play_circle
+            </span>
           </button>
         </div>
+        <span class="spanSeekBar CurrentSeekBar"></span>
+        <div class="contSeekBar">
+          <span class="spanSeekBar IniSeekBar"></span>
+          <input type="range" class="seekBar"></input>
+          <span class="spanSeekBar EndSeekBar"></span>
+        </div>
 
-        <input type="range" class="seekbar"></input>
         <div class="contVolumen">
-          <span class="materialIcons colorSpan">
-            Down
+          <button type="submit" class="mutedButton">
+            <span class="material-symbols-outlined volume_Notmuted">volume_up</span>
+          </button>
+          <button class="volumenButton colorSpan">
+            <span class="material-symbols-outlined volume_changed" id="buttonDown">
+              volume_down_alt
+          </button>
           </span>
-          <input type="range" class="volume">
-          <span class="materialIcons colorSpan">
-            Up
-          </span></input>
+          <span class="spanSeekBar IniSeekBar"></span>
+          <input type="range" class="volume"></input>
+          <span class="spanSeekBar EndSeekBar"></span>
+          <button class="volumenButton colorSpan">
+            <span class="material-symbols-outlined volume_changed" id="buttonUp">
+              volume_up
+            </span>
+          </button>
         </div>
       </div>
     </div>
