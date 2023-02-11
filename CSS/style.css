@@ -76,7 +76,7 @@ html {
 .contCentral > .contTop > .contSelectSong > label {
   position: relative;
   text-align: center;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 700;
   color: rgb(9, 9, 9);
   margin: 0% 2%;
@@ -109,7 +109,7 @@ html {
   padding: 0.5% auto;
   position: relative;
   text-align: justify;
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   font-weight: 400;
   color: rgb(250, 29, 29);
   margin: 0% auto;
@@ -118,7 +118,7 @@ html {
 .contCentral > .contTop > .contSelectSong > .contSelectButton > .selectSong > option {
   position: relative;
   text-align: justify;
-  font-size: 0.7rem;
+  font-size: 0.6rem;
   font-weight: 400;
   color: rgb(63, 63, 63);
   margin: 0% auto;
@@ -365,6 +365,7 @@ html {
   height: 3rem;
   padding: 1% auto;
   margin: 0% auto;
+  background-color: transparent;
 }
 .contCentral > .audioPlayer > .controls > .contSeekBar > .spanSeekBar {
   position: relative;
@@ -384,27 +385,32 @@ html {
   margin: 0% auto;
   width: 3rem;
 }
-.contCentral > .audioPlayer > .controls > .contSeekBar > .seekBar {
+.contCentral > .audioPlayer > .controls > .contSeekBar > .seekBarPlay {
   position: relative;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 100%;
-  border-radius: 6px;
-  background: #e0e0e0;
-  box-shadow: inset 11px 11px 24px #c1c1c1, inset -11px -11px 24px #ffffff;
+  background: rgba(1, 62, 6, 0.3);
+  border-radius: 9px;
+  box-shadow: 1px 6px 36px rgba(0, 7, 2, 0.2);
+  backdrop-filter: blur(7.7px);
+  -webkit-backdrop-filter: blur(7.7px);
+  border: 2px solid rgba(70, 125, 70, 0.68);
   -webkit-appearance: none;
   width: 90%;
-  height: 3rem;
+  height: 2.8rem;
   padding: 0%;
   margin: 0% auto;
+  border: 2px solid rgba(54, 250, 54, 0.4);
   border-radius: 3px;
+  background-color: rgba(2, 165, 2, 0.1);
   overflow: hidden;
 }
-.contCentral > .audioPlayer > .controls > .contSeekBar > .seekBar::-webkit-slider-thumb {
+.contCentral > .audioPlayer > .controls > .contSeekBar > .seekBarPlay::-webkit-slider-thumb {
   -webkit-appearance: none;
-  height: 3rem;
+  height: 2.8rem;
   width: 0.2rem;
   background: rgb(250, 29, 29);
   border-radius: 9px;
@@ -412,33 +418,100 @@ html {
   outline-offset: 2px;
   cursor: pointer;
 }
-.contCentral > .audioPlayer > .controls > .contSeekBar > .seekBar:focus {
+.contCentral > .audioPlayer > .controls > .contSeekBar > .seekBarPlay:focus {
   outline: none;
 }
-.contCentral > .audioPlayer > .controls > .contSeekBar > .seekBar::-moz-range-thumb {
-  height: 3rem;
+.contCentral > .audioPlayer > .controls > .contSeekBar > .seekBarPlay::-moz-range-thumb {
+  height: 2.8rem;
   width: 90%;
-  background: rgba(41, 41, 41, 0.93);
+  background: rgba(2, 165, 2, 0.1);
   cursor: pointer;
 }
-.contCentral > .audioPlayer > .controls > .contSeekBar > .seekBar::-webkit-slider-runnable-track {
-  border-radius: 6px;
-  background: #e0e0e0;
-  box-shadow: inset 11px 11px 24px #c1c1c1, inset -11px -11px 24px #ffffff;
+.contCentral > .audioPlayer > .controls > .contSeekBar > .seekBarPlay::-webkit-slider-runnable-track {
+  background: rgba(1, 62, 6, 0.3);
+  border-radius: 9px;
+  box-shadow: 1px 6px 36px rgba(0, 7, 2, 0.2);
+  backdrop-filter: blur(7.7px);
+  -webkit-backdrop-filter: blur(7.7px);
+  border: 2px solid rgba(70, 125, 70, 0.68);
   border-radius: 3px;
   width: 90%;
-  height: 3rem;
+  height: 2.8rem;
   cursor: pointer;
-  background: rgba(41, 41, 41, 0.93);
+  background: rgba(2, 165, 2, 0.1);
 }
-.contCentral > .audioPlayer > .controls > .contSeekBar > .seekBar:focus::-webkit-slider-runnable-track {
-  background: rgba(41, 41, 41, 0.93);
+.contCentral > .audioPlayer > .controls > .contSeekBar > .seekBarPlay:focus::-webkit-slider-runnable-track {
+  background-color: rgba(2, 165, 2, 0.1);
 }
-.contCentral > .audioPlayer > .controls > .contSeekBar > .seekBar::-moz-range-track {
+.contCentral > .audioPlayer > .controls > .contSeekBar > .seekBarPlay::-moz-range-track {
   width: 90%;
-  height: 3rem;
+  height: 2.8rem;
   cursor: pointer;
-  background: rgba(41, 41, 41, 0.93);
+  background-color: rgba(2, 165, 2, 0.1);
+}
+.contCentral > .audioPlayer > .controls > .contSeekBar > .seekBarNotPlay {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background: rgba(203, 203, 203, 0.2);
+  border-radius: 9px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(7.7px);
+  -webkit-backdrop-filter: blur(7.7px);
+  border: 1px solid rgba(203, 203, 203, 0.61);
+  -webkit-appearance: none;
+  width: 90%;
+  height: 2.8rem;
+  padding: 0%;
+  margin: 0% auto;
+  border: 1px solid rgb(140, 140, 140);
+  border-radius: 3px;
+  background-color: rgba(167, 166, 166, 0.3);
+  overflow: hidden;
+}
+.contCentral > .audioPlayer > .controls > .contSeekBar > .seekBarNotPlay::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 2.8rem;
+  width: 0.2rem;
+  background: rgb(250, 29, 29);
+  border-radius: 9px;
+  outline: 1px solid rgba(250, 29, 29, 0.3);
+  outline-offset: 2px;
+  cursor: pointer;
+}
+.contCentral > .audioPlayer > .controls > .contSeekBar > .seekBarNotPlay:focus {
+  outline: none;
+}
+.contCentral > .audioPlayer > .controls > .contSeekBar > .seekBarNotPlay::-moz-range-thumb {
+  height: 2.8rem;
+  width: 90%;
+  background: rgba(167, 166, 166, 0.3);
+  cursor: pointer;
+}
+.contCentral > .audioPlayer > .controls > .contSeekBar > .seekBarNotPlay::-webkit-slider-runnable-track {
+  background: rgba(203, 203, 203, 0.2);
+  border-radius: 9px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(7.7px);
+  -webkit-backdrop-filter: blur(7.7px);
+  border: 1px solid rgba(203, 203, 203, 0.61);
+  border-radius: 3px;
+  width: 90%;
+  height: 2.8rem;
+  cursor: pointer;
+  background: rgba(167, 166, 166, 0.3);
+}
+.contCentral > .audioPlayer > .controls > .contSeekBar > .seekBarNotPlay:focus::-webkit-slider-runnable-track {
+  background-color: rgba(167, 166, 166, 0.3);
+}
+.contCentral > .audioPlayer > .controls > .contSeekBar > .seekBarNotPlay::-moz-range-track {
+  width: 90%;
+  height: 2.8rem;
+  cursor: pointer;
+  background-color: rgba(167, 166, 166, 0.3);
 }
 .contCentral > .audioPlayer > .controls > .contVolumen {
   position: relative;
@@ -480,7 +553,7 @@ html {
   width: 3.2rem;
   padding: 0.3%;
   margin: 1% 1.5%;
-  margin-right: 6%;
+  margin-right: 2.5%;
   transition: all 0.35s ease;
   border: 1px solid rgba(167, 166, 166, 0.3);
   cursor: pointer;
@@ -617,26 +690,26 @@ html {
 }
 
 .volume_muted {
-  transform: scale(1.9);
+  transform: scale(1.7);
   color: rgb(250, 29, 29);
-  font-weight: normal;
+  font-weight: 300;
   transition: all 0.35s ease;
 }
 .volume_muted:hover, .volume_muted:focus {
   color: rgba(43, 211, 43, 0.9);
-  transform: scale(2);
+  transform: scale(1.8);
   font-weight: 400;
 }
 
 .volume_Notmuted {
-  transform: scale(1.9);
-  font-weight: normal;
+  transform: scale(1.7);
+  font-weight: 300;
   transition: all 0.35s ease;
   color: rgba(41, 41, 41, 0.93);
 }
 .volume_Notmuted:hover, .volume_Notmuted:focus {
   color: rgb(250, 29, 29);
-  transform: scale(2);
+  transform: scale(1.8);
   font-weight: 400;
 }
 
@@ -649,6 +722,64 @@ html {
   color: rgb(162, 162, 85);
   transform: scale(1.15);
   font-weight: 400;
+}
+
+.valueMuted {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background: rgba(62, 1, 1, 0.3);
+  border-radius: 9px;
+  box-shadow: 1px 6px 36px rgba(0, 7, 2, 0.2);
+  backdrop-filter: blur(7.7px);
+  -webkit-backdrop-filter: blur(7.7px);
+  border: 2px solid rgba(125, 70, 70, 0.68);
+  height: 2.8rem;
+  width: 3.2rem;
+  padding: 0.1%;
+  margin: 0%;
+  position: relative;
+  text-align: justify;
+  font-size: 0.65rem;
+  font-weight: bold;
+  color: rgb(246, 240, 240);
+  margin: 1% 2%;
+  padding: 1%;
+  text-align: center;
+  border: 1px solid rgba(250, 29, 29, 0.3);
+  border-radius: 6px;
+}
+
+.valueNotMuted {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background: rgba(1, 62, 6, 0.3);
+  border-radius: 9px;
+  box-shadow: 1px 6px 36px rgba(0, 7, 2, 0.2);
+  backdrop-filter: blur(7.7px);
+  -webkit-backdrop-filter: blur(7.7px);
+  border: 2px solid rgba(70, 125, 70, 0.68);
+  height: 2.8rem;
+  width: 3.2rem;
+  padding: 0.1%;
+  margin: 0%;
+  position: relative;
+  text-align: justify;
+  font-size: 0.65rem;
+  font-weight: bold;
+  color: rgb(246, 240, 240);
+  margin: 1% 2%;
+  padding: 1%;
+  text-align: center;
+  border: 1px solid rgba(54, 250, 54, 0.9);
+  border-radius: 6px;
 }
 
 /*# sourceMappingURL=style.css.map */

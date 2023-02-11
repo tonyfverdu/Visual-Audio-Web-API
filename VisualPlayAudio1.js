@@ -19,13 +19,14 @@ const endSeekBar = document.querySelector('.EndSeekBar')
 const currentSeekBar = document.querySelector('.CurrentSeekBar')
 const volumenBar = document.querySelector('.volume')
 const mutedVolume = document.querySelector(".mutedButton")
+const elemValueVolume = document.querySelector("#valueMuted");
 const volumeDown = document.querySelector("#buttonDown")
 const volumeUp = document.querySelector("#buttonUp")
 
-audio.addEventListener("loadeddata", function() {
+audio.addEventListener("loadeddata", function () {
     durationMinuten = (this.duration / 60).toFixed(2);
     endSeekBar.innerHTML = `${durationMinuten}m`
-   })
+})
 
 //  2.- Canvas configuration
 const canvasCtx = canvasElement.getContext('2d')
@@ -34,7 +35,9 @@ const HEIGHT = canvasElement.clientHeight
 
 //  3.- Bars (seekbar and volumenBar) init configuration
 seekBar.value = 0
+currentSeekBar.innerHTML = '0:00%'
 volumenBar.value = 50
+elemValueVolume.innerHTML = `${volumenBar.value}%`
 audio.volume = 0.5
 mutedVolume.value = false
 
@@ -57,13 +60,25 @@ function togglePlayPause() {
         if (audioState.isPaused) {
             playPauseButton.innerHTML = pauseIcon;
             audio.play();
+            elemValueVolume.classList.remove("valueMuted")
+            elemValueVolume.classList.add("valueNotMuted")
+            seekBar.classList.remove("seekBarNotPlay")
+            seekBar.classList.add("seekBarPlay")
         } else {
             if (audioState.isReplay) { // Replay
                 playPauseButton.innerHTML = pauseIcon;
                 audio.play();
                 audioState.isReplay = false;
+                elemValueVolume.classList.remove("valueMuted")
+                elemValueVolume.classList.add("valueNotMuted")
+                seekBar.classList.remove("seekBarPlay")
+                seekBar.classList.add("seekBarPlay")
                 return;
             }
+            elemValueVolume.classList.remove("valueNotMuted")
+            elemValueVolume.classList.add("valueMuted")
+            seekBar.classList.remove("seekBarPlay")
+            seekBar.classList.add("seekBarNotPlay")
             playPauseButton.innerHTML = playIcon;
             audio.pause();
         }
@@ -85,6 +100,7 @@ songSelect.addEventListener('change', (ev) => {
 
 buttonSelectSong.addEventListener('click', () => {
     audio.setAttribute('src', fileSong);
+    playPauseButton.innerHTML = playIcon;
 })
 
 //  3.- Events in the audioElement (timeupdate, ended and canplay)
@@ -92,7 +108,8 @@ buttonSelectSong.addEventListener('click', () => {
 audio.addEventListener('timeupdate', setProgress);
 
 function setProgress() {
-    currentSeekBar.innerHTML = `${ ((100 * audio.currentTime) / (durationMinuten * 60)).toFixed(2) }%`;
+    currentSeekBar.innerHTML = `${((100 * audio.currentTime) / (durationMinuten * 60)).toFixed(2)}%`;
+    if (audio.currentTime === 0 || isNaN((100 * audio.currentTime) / (durationMinuten * 60))) currentSeekBar.innerHTML = '0:00%'
     seekBar.value = audio.currentTime;
 
 }
@@ -111,36 +128,42 @@ function setDuration() {
 }
 //  3.4.- Event "muted" in the mutedVolume (muted => !muted)
 const mutedIcon = '<span class="material-symbols-outlined volume_muted">volume_off</span>'
-const notMutedIcon =  '<span class="material-symbols-outlined volume_Notmuted">volume_up</span>'
+const notMutedIcon = '<span class="material-symbols-outlined volume_Notmuted">volume_up</span>'
 
 mutedVolume.addEventListener('click', () => {
-    if(mutedVolume.value === "false") {
+    if (mutedVolume.value === "false") {
         mutedVolume.innerHTML = mutedIcon;
         mutedVolume.value = "true"
         audio.muted = true
+        elemValueVolume.classList.remove("valueNotMuted")
+        elemValueVolume.classList.add("valueMuted")
     } else {
         mutedVolume.innerHTML = notMutedIcon;
         mutedVolume.value = "false"
         audio.muted = false
+        elemValueVolume.classList.remove("valueMuted")
+        elemValueVolume.classList.add("valueNotMuted")
     }
 })
 
-//  3.5- Events "change volume" in the buttonVolume 
+//  3.5.- Events "change volume" in the buttonVolume 
 volumeDown.addEventListener('click', () => {
     if (audio.volume >= 0.10) {
-        audio.volume =  audio.volume - 0.1;
+        audio.volume = audio.volume - 0.1;
     } else {
-        audio.volume =  0;
+        audio.volume = 0;
     }
-    volumenBar.value =  audio.volume * 100
+    volumenBar.value = audio.volume * 100
+    elemValueVolume.innerHTML = `${volumenBar.value}%`
 })
 volumeUp.addEventListener('click', () => {
     if (audio.volume <= 0.9) {
-        audio.volume =  audio.volume + 0.1;
+        audio.volume = audio.volume + 0.1;
     } else {
-        audio.volume =  1;
+        audio.volume = 1;
     }
-    volumenBar.value =  audio.volume * 100
+    volumenBar.value = audio.volume * 100
+    elemValueVolume.innerHTML = `${volumenBar.value}%`
 })
 
 // 4.-  Event "input" in the bar (input type "range) "seekBar", (input => onSeek)
@@ -148,11 +171,15 @@ seekBar.addEventListener('input', onSeek);
 function onSeek(evt) {
     audio.currentTime = evt.target.value;
 }
+seekBar.addEventListener('change', () => {
+    this.style = `linear-gradient('red' ${audio.currentTime}, 'transparent')`;
+})
 
 // 5.-  Event "input" in the bar (input type "range") "volumenBar", (input => onVolumenSeek)
 volumenBar.addEventListener('input', onVolumenSeek);
 function onVolumenSeek(ev) {
     audio.volume = ev.target.value / 100;
+    elemValueVolume.innerHTML = `${ev.target.value}%`
 }
 
 //  Connect the "audio source" (AudioNode "audioElement") with the context of audio ("audioCtx"), 

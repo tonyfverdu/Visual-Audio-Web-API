@@ -64,7 +64,7 @@
         <span class="spanSeekBar CurrentSeekBar"></span>
         <div class="contSeekBar">
           <span class="spanSeekBar IniSeekBar"></span>
-          <input type="range" class="seekBar"></input>
+          <input type="range" class="seekBar seekBarNotPlay"></input>
           <span class="spanSeekBar EndSeekBar"></span>
         </div>
 
@@ -72,18 +72,13 @@
           <button type="submit" class="mutedButton">
             <span class="material-symbols-outlined volume_Notmuted">volume_up</span>
           </button>
+          <span id="valueMuted" class="valueMuted"></span>
           <button class="volumenButton colorSpan">
-            <span class="material-symbols-outlined volume_changed" id="buttonDown">
-              volume_down_alt
+            <span class="material-symbols-outlined volume_changed" id="buttonDown">volume_down_alt</span>
           </button>
-          </span>
-          <span class="spanSeekBar IniSeekBar"></span>
           <input type="range" class="volume"></input>
-          <span class="spanSeekBar EndSeekBar"></span>
           <button class="volumenButton colorSpan">
-            <span class="material-symbols-outlined volume_changed" id="buttonUp">
-              volume_up
-            </span>
+            <span class="material-symbols-outlined volume_changed" id="buttonUp">volume_up</span>
           </button>
         </div>
       </div>
