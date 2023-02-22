@@ -46,12 +46,12 @@ html {
     justify-content: flex-start;
     @include n.neuMorphismus3;
     width: 60%;
-    height: auto;
-    padding: 2%;
-    margin: 0% auto;
-    margin-top: 5%;
+    height: 18%;
+    padding: 0.5%;
+    margin: 2% auto;
+    margin-bottom: 0.5%;
 
-    &>.contSelectSong {
+    &>.contSelect {
       @include l.layoutFlexboxColumCenter;
       @include n.neuMorphismus4;
       width: 36%;
@@ -76,7 +76,7 @@ html {
         width: 79%;
         gap: 5%;
 
-        &>.selectSong {
+        &>.select {
           @include l.layoutFlexboxRowCenter;
           height: 3.8vh;
           width: 12rem;
@@ -149,28 +149,46 @@ html {
     }
   }
 
+  &>.contCanvas {
+    @include l.layoutFlexboxRowCenter;
+    justify-content: space-between;
+    @include n.neuMorphismus3;
+    width: 60%;
+    height: 50%;
+    padding: 0.3%;
+    margin: 0% auto;
+    margin-bottom: 0.5%;
+
+    &>.canvas {
+      @include l.layoutFlexboxRowCenter;
+      align-items: flex-start;
+      @include g.boxShadowGlassMorphismus4;
+      width: 100%;
+      height: 100%;
+      padding: 0.1%;
+      margin: 1% auto;
+      margin: 1% auto;
+      border-radius: '9px';
+      border: 1px solid v.$backgroundColorHellGrayT;
+      background-color: v.$backgroundColorBlack;
+    }
+
+    &>#canvasBars {
+      width: 100%;
+    }
+  }
+
   &>.audioPlayer {
     @include l.layoutFlexboxColumCenter;
     align-items: flex-start;
     @include n.neuMorphismus4;
-    height: 45vh;
     width: 60%;
+    height: 18%;
     padding: 1%;
     margin: 0% auto;
+    margin-bottom: 2%;
     border: 1px solid v.$colorHellCardGlassBorder;
     border-radius: 19px;
-
-    &>.canvas {
-      @include l.layoutFlexboxRowCenter;
-      @include g.boxShadowGlassMorphismus4;
-      width: 100%;
-      height: 260px;
-      padding: 0%;
-      margin: 0% auto;
-      border: 2px solid v.$backgroundColorHellGrayT;
-      border-radius: 9px;
-      background-color: v.$backgroundColorBlack;
-    }
 
     &>.controls {
       @include l.layoutFlexboxRowCenter;

@@ -1,0 +1,179 @@
+@use './myvariables' as v;
+@use './layouts' as l;
+
+// CONTAINER CENTRAL  /////////////////////////////////////
+@mixin designContainerCentral {
+  @include l.layoutFlexboxColumCenter;
+  justify-content: flex-start;
+  height: auto;
+  overflow: hidden;
+}
+
+//  configuration of Text  //////////////////////////////
+@mixin configurationText1 ($parColor, $parFont-size) {
+  position: relative;
+  text-align: justify;
+  font-size: $parFont-size;
+  font-weight: 400;
+  color: $parColor;
+  margin: 0% auto;
+
+}
+
+@mixin configurationText2 ($parColor, $parFont-size) {
+  position: relative;
+  text-align: justify;
+  font-size: $parFont-size;
+  font-weight: bold;
+  color: $parColor;
+  margin: 1% 2%;
+  padding: 1%;
+}
+
+@mixin configurationLabel ($parColor, $parFont-size) {
+  position: relative;
+  text-align: center;
+  font-size: $parFont-size;
+  font-weight: 700;
+  color: $parColor;
+  margin: 0% 2%;
+  padding: 1%;
+}
+
+@mixin configurationTextbutton ($parColor, $parFont-size) {
+  position: relative;
+  text-align: center;
+  font-size: $parFont-size;
+  color: $parColor;
+  margin: 0% auto;
+  padding: 3% 2%;
+}
+
+// Configuration of Image  ***********************/
+@mixin figure {
+  position: relative;
+  @include l.layoutFlexboxRowCenter;
+  margin: 0% auto;
+}
+
+@mixin imageGenerall {
+  position: relative;
+  width: 100%;
+  object-fit:contain;
+  image-rendering: optimizeSpeed;
+}
+
+@mixin backgroundImage {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:contain;
+}
+
+//  BUTTONS  ////////////////////////////////
+@mixin buttonTypeNeuMorphismus ($colorText, $sizeText) {
+  display: block;
+  margin: 0% auto;
+  padding: 4% 9%;
+  color: $colorText;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: v.$textShadowTitleHeader1Hoover;
+  font-size: $sizeText;
+  font-weight: 900;
+
+  border-radius: 6px;
+  background: linear-gradient(315deg, #f0f0f0, #cacaca);
+  box-shadow: -3px -3px 7px #949494,
+    2px 2px 4px #ffffff;
+}
+@mixin buttonTypeNeuMorphismus2 ($colorText) {
+  display: block;
+  margin: 0% auto;
+  padding: 4% 9%;
+  color: $colorText;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: v.$textShadowTitleHeader1Hoover;
+  font-weight: 900;
+
+  border-radius: 6px;
+  background: linear-gradient(315deg, #f0f0f0, #cacaca);
+  box-shadow: -3px -3px 7px #949494,
+    2px 2px 4px #ffffff;
+}
+
+@mixin buttonType1 {
+  display: block;
+  float: right;
+  padding: 4% 9%;
+  background-color: v.$backgroundColorHellGray;
+  border: none;
+  border-radius: 9px;
+  margin: 0% auto;
+
+  color: v.$colorDunkel;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+@mixin buttonType2 {
+  position: relative;
+  width: 100%;
+  display: block;
+  float: right;
+  padding: 1%;
+  background-color: v.$backgroundColorHellGray;
+  border: none;
+  border-radius: 9px;
+  margin: 0%;
+
+  color: v.$colorDunkel;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+@mixin buttonType3 {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0%;
+  background-color: v.$backgroundColorHellGray;
+  border: none;
+  border-radius: 6px;
+  margin: 0%;
+
+  color: v.$colorDunkel;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+//  HEADER  ////////////////////////////////
+@mixin desigHeader ($parbackgroundcolor) {
+  @include l.layoutFlexboxRowCenter;
+  margin: 0% auto;
+  padding: 2% auto;
+  background-color: $parbackgroundcolor;
+}
+
+@mixin desig_H_element ($varColor, $parFont-size) {
+  color: $varColor;
+  text-align: center;
+  font-size: $parFont-size;
+  font-weight: bold;
+  margin: 3% auto;
+
+  text-shadow: v.$textShadow1;
+}
+
+@mixin desig_H_element2 ($varColor, $parFont-size) {
+  color: $varColor;
+  text-align: left;
+  font-size: $parFont-size;
+  font-weight: bold;
+  margin: 1% auto;
+
+  text-shadow: v.$textShadow1;
+}

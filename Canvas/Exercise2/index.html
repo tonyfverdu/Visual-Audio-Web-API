@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visualizator Audio Canvas</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="./CSS/main.css">
+</head>
+
+<body>
+  <div class="contCentral">
+    <header class="headerPrinc">
+      <h1 class="titleWeb">Exercise 2 Canvas: Audio Canvas Visualizator</h1>
+    </header>
+    <div class="contButtons">
+      <button id="btnPlay" class="button">
+        <span class="material-symbols-outlined play">
+          play_circle
+        </span>
+      </button>
+      <button id="btnOscillator" class="button">
+        <span class="material-symbols-outlined">
+          music_note
+        </span>
+      </button>
+      <button id="btnMuted" class="button">
+        <span class="material-symbols-outlined">
+          volume_mute
+        </span>
+      </button>
+    </div>
+
+    <div class="contCanvas">
+      <canvas id="myCanvasVisualizator" class="canvas" width="450px" height="320px"></canvas>
+    </div>
+
+  </div>
+  <script src="./visualizatorCanvas.js"></script>
+</body>
+
+</html>

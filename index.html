@@ -15,44 +15,50 @@
 <body>
   <div class="contCentral">
     <div class="contTop">
-      <div class="contSelectSong">
+      <div class="contSelect">
         <label for="songChose">Choose a song:</label>
         <div class="contSelectButton">
-          <select name="select" class="selectSong">
-            <option value="./assets/mp3/John Lennon 'Imagine'.mp3" selected>Image</option>
-            <option value="./assets/mp3/The Beatles - Revolver - 01 Taxman.mp3">Taxman</option>
-            <option value="./assets/mp3/The Beatles - Revolver - 02 Eleanor Rigby.mp3">Eleanor Rigby</option>
-            <option value="./assets/mp3/The Beatles - Revolver - 03 I'm Only Sleeping.mp3">I'm Only Sleeping</option>
-            <option value="./assets/mp3/The Beatles - Revolver - 04 Love You To.mp3">Love You To</option>
-            <option value="./assets/mp3/The Beatles - Revolver - 05 Here, There And Everywhere.mp3">Here, There And
-              Everywhere</option>
-            <option value="./assets/mp3/The Beatles - Revolver - 06 Yellow Submarine.mp3">Yellow Submarine</option>
-            <option value="./assets/mp3/The Beatles - Revolver - 07 She Said She Said.mp3">She Said She Said</option>
-            <option value="./assets/mp3/The Beatles - Revolver - 08 Good Day Sunshine.mp3">Good Day Sunshine</option>
-            <option value="./assets/mp3/The Beatles - Revolver - 09 And Your Bird Can Sing.mp3">And Your Bird Can Sing
-            </option>
-            <option value="./assets/mp3/The Beatles - Revolver - 10 For No One.mp3">For No One</option>
-            <option value="./assets/mp3/The Beatles - Revolver - 11 Doctor Robert.mp3">Doctor Robert</option>
-            <option value="./assets/mp3/The Beatles - Revolver - 12 I Want To Tell You.mp3">I Want To Tell You</option>
-            <option value="./assets/mp3/The Beatles - Revolver - 13 Got To Get You Into My Life.mp3">Got To Get You Into
-              My Life</option>
-            <option value="./assets/mp3/The Beatles - Revolver - 14 Tomorrow Newer Knows.mp3">Tomorrow Newer Knows
-            </option>
-            <option value="./assets/albums_mp3/18 Others/Don't Let Me Down (Remastered 2009) (128 kbps).mp3">Don't Let
-              Me Down</option>
-            <option value="./assets/albums_mp3/18 Others/Lady Madonna (Remastered 2015) (128 kbps).mp3">Lady Madonna
-            </option>
-            <option
-              value="./assets/albums_mp3/9 Magical Mystery Tour/The Beatles - Magical Mystery Tour - 11 All You Need Is Love.mp3">
-              All You Need Is Love</option>
+          <select id="selectSong" name="select" class="select">
+            <option class="optionSongs" value="./assets/mp3/John Lennon 'Imagine'.mp3" selected>Image</option>
+            <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 01 Taxman.mp3">Taxman</option>
+            <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 02 Eleanor Rigby.mp3">Eleanor Rigby</option>
+            <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 03 I'm Only Sleeping.mp3">I'm Only Sleeping</option>
+            <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 04 Love You To.mp3">Love You To</option>
+            <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 05 Here, There And Everywhere.mp3">Here, There And Everywhere</option>
+            <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 06 Yellow Submarine.mp3">Yellow Submarine</option>
+            <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 07 She Said She Said.mp3">She Said She Said</option>
+            <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 08 Good Day Sunshine.mp3">Good Day Sunshine</option>
+            <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 09 And Your Bird Can Sing.mp3">And Your Bird Can Sing</option>
+            <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 10 For No One.mp3">For No One</option>
+            <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 11 Doctor Robert.mp3">Doctor Robert</option>
+            <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 12 I Want To Tell You.mp3">I Want To Tell You</option>
+            <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 13 Got To Get You Into My Life.mp3">Got To Get You Into My Life</option>
+            <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 14 Tomorrow Newer Knows.mp3">Tomorrow Newer Knows</option>
+            <option class="optionSongs" value="./assets/albums_mp3/18 Others/Don't Let Me Down (Remastered 2009) (128 kbps).mp3">Don't Let Me Down</option>
+            <option class="optionSongs" value="./assets/albums_mp3/18 Others/Lady Madonna (Remastered 2015) (128 kbps).mp3">Lady Madonna</option>
+            <option class="optionSongs" value="./assets/albums_mp3/9 Magical Mystery Tour/The Beatles - Magical Mystery Tour - 11 All You Need Is Love.mp3">All You Need Is Love</option>
           </select>
-          <button type="submit" class="buttonSelect">Select</button>
+          <button id="buttonSelectSong" type="submit" class="buttonSelect">Select</button>
+        </div>
+      </div>
+      <div class="contSelect">
+        <label for="visualizatorChose">Choose a Visualizator:</label>
+        <div class="contSelectButton">
+          <select id="selectVisualizator" name="select" class="select">
+            <option class="optionVisualizator" value="Bars" selected>Horizontal Bars</option>
+            <option class="optionVisualizator" value="Hell Doom">Hell Doom</option>
+            <option class="optionVisualizator" value="Fireworks">Fireworks</option>
+            <option class="optionVisualizator" value="Circles">Circles</option>
+          </select>
         </div>
       </div>
     </div>
 
+    <div class="contCanvas">
+      <canvas id="canvasBars" class="canvas"></canvas>
+    </div>
+
     <div class="audioPlayer">
-      <canvas class="canvas" height="260px" width="540px"></canvas>
       <div class="controls">
         <div class="contButton">
           <button class="playPause">
@@ -85,7 +91,11 @@
     </div>
   </div>
 
-  <script src="./VisualPlayAudio1.js"></script>
+
+  <script type="module" src="./scripts/initialization.js"></script>
+  <script type="module" src="./scripts/events.js"></script>
+  <script type="module" src="./scripts/graphic.js"></script>
+  <script type="module" src="./VisualPlayAudio1.js"></script>
 </body>
 
 </html>

@@ -50,12 +50,12 @@ html {
   background: #e0e0e0;
   box-shadow: inset -12px -12px 24px #aaaaaa, inset 12px 12px 24px #ffffff;
   width: 60%;
-  height: auto;
-  padding: 2%;
-  margin: 0% auto;
-  margin-top: 5%;
+  height: 18%;
+  padding: 0.5%;
+  margin: 2% auto;
+  margin-bottom: 0.5%;
 }
-.contCentral > .contTop > .contSelectSong {
+.contCentral > .contTop > .contSelect {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -73,7 +73,7 @@ html {
   border-radius: 12px;
   background-color: rgba(231, 230, 230, 0.6);
 }
-.contCentral > .contTop > .contSelectSong > label {
+.contCentral > .contTop > .contSelect > label {
   position: relative;
   text-align: center;
   font-size: 1rem;
@@ -84,7 +84,7 @@ html {
   text-shadow: -4px -3px 4px rgba(0, 0, 0, 0.39), 2px 3px 4px rgba(0, 0, 0, 0.3);
   margin: 2% auto;
 }
-.contCentral > .contTop > .contSelectSong > .contSelectButton {
+.contCentral > .contTop > .contSelect > .contSelectButton {
   position: relative;
   display: flex;
   flex-direction: row;
@@ -96,7 +96,7 @@ html {
   width: 79%;
   gap: 5%;
 }
-.contCentral > .contTop > .contSelectSong > .contSelectButton > .selectSong {
+.contCentral > .contTop > .contSelect > .contSelectButton > .select {
   position: relative;
   display: flex;
   flex-direction: row;
@@ -115,7 +115,7 @@ html {
   margin: 0% auto;
   font-weight: 600;
 }
-.contCentral > .contTop > .contSelectSong > .contSelectButton > .selectSong > option {
+.contCentral > .contTop > .contSelect > .contSelectButton > .select > option {
   position: relative;
   text-align: justify;
   font-size: 0.6rem;
@@ -125,7 +125,7 @@ html {
   margin: 1% auto;
   padding: 1% auto;
 }
-.contCentral > .contTop > .contSelectSong > .contSelectButton > .buttonSelect {
+.contCentral > .contTop > .contSelect > .contSelectButton > .buttonSelect {
   display: block;
   margin: 0% auto;
   padding: 4% 9%;
@@ -149,7 +149,7 @@ html {
   transition: all 0.35s ease;
   cursor: pointer;
 }
-.contCentral > .contTop > .contSelectSong > .contSelectButton > .buttonSelect:hover {
+.contCentral > .contTop > .contSelect > .contSelectButton > .buttonSelect:hover {
   background: linear-gradient(315deg, #8f8f8f, #414141);
   box-shadow: -2px -2px 5px #545454, 1px 1px 4px #bababa;
   font-weight: bolder;
@@ -219,6 +219,49 @@ html {
   border-radius: 12px 12px 29px 29px;
   background-color: rgba(231, 230, 230, 0.6);
 }
+.contCentral > .contCanvas {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  border-radius: 20px;
+  background: #e0e0e0;
+  box-shadow: inset -12px -12px 24px #aaaaaa, inset 12px 12px 24px #ffffff;
+  width: 60%;
+  height: 50%;
+  padding: 0.3%;
+  margin: 0% auto;
+  margin-bottom: 0.5%;
+}
+.contCentral > .contCanvas > .canvas {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  align-items: flex-start;
+  box-shadow: inset 0.8rem 0.5rem 4rem 0 rgba(195, 195, 195, 0.8);
+  backdrop-filter: blur(12px);
+  border: 0.3rem solid rgb(170, 169, 169);
+  border-left: 0.3rem solid rgb(90, 90, 90);
+  border-bottom: 0.38rem solid rgb(49, 49, 49);
+  border-radius: 12px;
+  width: 100%;
+  height: 100%;
+  padding: 0.1%;
+  margin: 1% auto;
+  margin: 1% auto;
+  border-radius: "9px";
+  border: 1px solid rgba(167, 166, 166, 0.6);
+  background-color: black;
+}
+.contCentral > .contCanvas > #canvasBars {
+  width: 100%;
+}
 .contCentral > .audioPlayer {
   position: relative;
   display: flex;
@@ -230,33 +273,13 @@ html {
   border-radius: 6px;
   background: linear-gradient(315deg, #cacaca, #f0f0f0);
   box-shadow: -2px -2px 4px #7d7d7d, 2px 2px 4px #ffffff;
-  height: 45vh;
   width: 60%;
+  height: 18%;
   padding: 1%;
   margin: 0% auto;
+  margin-bottom: 2%;
   border: 1px solid rgb(224, 224, 236);
   border-radius: 19px;
-}
-.contCentral > .audioPlayer > .canvas {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  box-shadow: inset 0.8rem 0.5rem 4rem 0 rgba(195, 195, 195, 0.8);
-  backdrop-filter: blur(12px);
-  border: 0.3rem solid rgb(170, 169, 169);
-  border-left: 0.3rem solid rgb(90, 90, 90);
-  border-bottom: 0.38rem solid rgb(49, 49, 49);
-  border-radius: 12px;
-  width: 100%;
-  height: 260px;
-  padding: 0%;
-  margin: 0% auto;
-  border: 2px solid rgba(167, 166, 166, 0.6);
-  border-radius: 9px;
-  background-color: black;
 }
 .contCentral > .audioPlayer > .controls {
   position: relative;

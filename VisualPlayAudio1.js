@@ -1,229 +1,240 @@
+import { canvasBars, canvasBarCtx, WIDTH_BAR, HEIGHT_BAR } from "./scripts/graphic.js"
+import { randomColor, randomNumber } from "./scripts/functions.js"
+
 //  A.-  Definition init of system
 //  0.-  AudioContext of System
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)()
-
-//  1.- HTMLElement (fileSong, audioElement, canvasElement, playPauseButton, seekbar and volumenBar)
-const songSelect = document.querySelector('.selectSong')
-const optionElement = document.querySelectorAll('option')
-const buttonSelectSong = document.querySelector('.buttonSelect')
-let fileSong = "./assets/mp3/John Lennon 'Imagine'.mp3"
-const audio = new Audio(fileSong);
-let durationMinuten
-audio.preload = "auto"
-const canvasElement = document.querySelector('.canvas')
-const playPauseButton = document.querySelector('.playPause')
-const seekBar = document.querySelector('.seekBar')
-const iniSeekBar = document.querySelector('.IniSeekBar')
-iniSeekBar.innerHTML = `0:00m`
-const endSeekBar = document.querySelector('.EndSeekBar')
-const currentSeekBar = document.querySelector('.CurrentSeekBar')
-const volumenBar = document.querySelector('.volume')
-const mutedVolume = document.querySelector(".mutedButton")
-const elemValueVolume = document.querySelector("#valueMuted");
-const volumeDown = document.querySelector("#buttonDown")
-const volumeUp = document.querySelector("#buttonUp")
-
-audio.addEventListener("loadeddata", function () {
-    durationMinuten = (this.duration / 60).toFixed(2);
-    endSeekBar.innerHTML = `${durationMinuten}m`
-})
-
-//  2.- Canvas configuration
-const canvasCtx = canvasElement.getContext('2d')
-const WIDTH = canvasElement.clientWidth
-const HEIGHT = canvasElement.clientHeight
-
-//  3.- Bars (seekbar and volumenBar) init configuration
-seekBar.value = 0
-currentSeekBar.innerHTML = '0:00%'
-volumenBar.value = 50
-elemValueVolume.innerHTML = `${volumenBar.value}%`
-audio.volume = 0.5
-mutedVolume.value = false
-
-//  4.-  Messages of button (playPause)
-const pauseIcon = `<span class="material-symbols-outlined pause">pause_circle</span>`;
-const playIcon = `<span class="material-symbols-outlined play">play_circle</span>`;
-const replayIcon = `<span class="material-symbols-outlined replay">replay</span>`;
-
-//  5.-  Definition of variable "audioState", 2 values: replay oder paused
-let audioState = {
-    isReplay: false,
-    isPaused: true,
-};
-
-//  Definition of events  (click => button "playPause", )
-//  1.-  Event "click" in the button "playPause"  (click => togglePlayPause)
-playPauseButton.addEventListener('click', togglePlayPause);
-function togglePlayPause() {
-    audioCtx.resume().then(() => {
-        if (audioState.isPaused) {
-            playPauseButton.innerHTML = pauseIcon;
-            audio.play();
-            elemValueVolume.classList.remove("valueMuted")
-            elemValueVolume.classList.add("valueNotMuted")
-            seekBar.classList.remove("seekBarNotPlay")
-            seekBar.classList.add("seekBarPlay")
-        } else {
-            if (audioState.isReplay) { // Replay
-                playPauseButton.innerHTML = pauseIcon;
-                audio.play();
-                audioState.isReplay = false;
-                elemValueVolume.classList.remove("valueMuted")
-                elemValueVolume.classList.add("valueNotMuted")
-                seekBar.classList.remove("seekBarPlay")
-                seekBar.classList.add("seekBarPlay")
-                return;
-            }
-            elemValueVolume.classList.remove("valueNotMuted")
-            elemValueVolume.classList.add("valueMuted")
-            seekBar.classList.remove("seekBarPlay")
-            seekBar.classList.add("seekBarNotPlay")
-            playPauseButton.innerHTML = playIcon;
-            audio.pause();
-        }
-        audioState.isPaused = !audioState.isPaused;
-    });
+//  1.2.-  Definition of variable "audioState", 2 values: replay oder paused
+export let audioState = {
+  isPlay: false,
+  isReplay: false,
+  isPaused: true,
 }
 
-//  2.-  Event "change" in the input type="file" (fileSong) (change => ev.target.files[0].name --> src of audioElement)
-audio.setAttribute('src', `./assets/mp3/John Lennon 'Imagine'.mp3`)
-// fileSong.addEventListener('change', (ev) => {
-//     if (ev.target.files[0]) {
-//         audioElement.setAttribute('src', `./assets/mp3/${ev.target.files[0].name}`);
-//     }
-// })
-
-songSelect.addEventListener('change', (ev) => {
-    fileSong = optionElement[ev.target.selectedIndex].value
-})
-
-buttonSelectSong.addEventListener('click', () => {
-    audio.setAttribute('src', fileSong);
-    playPauseButton.innerHTML = playIcon;
-})
-
-//  3.- Events in the audioElement (timeupdate, ended and canplay)
-//  3.1.- Event "timeupdate" in the audioElement (timeupdate ==> setProgress)
-audio.addEventListener('timeupdate', setProgress);
-
-function setProgress() {
-    currentSeekBar.innerHTML = `${((100 * audio.currentTime) / (durationMinuten * 60)).toFixed(2)}%`;
-    if (audio.currentTime === 0 || isNaN((100 * audio.currentTime) / (durationMinuten * 60))) currentSeekBar.innerHTML = '0:00%'
-    seekBar.value = audio.currentTime;
-
-}
-//  3.2.- Event "ended" in the audioElement (ended==> onEnd).  End of play music in the audioElement
-audio.addEventListener('ended', onEnd);
-function onEnd() {
-    playPauseButton.innerHTML = replayIcon;
-    audio.currentTime = 0;
-    seekBar.value = 0;
-    audioState.isReplay = true;
-}
-//  3.3.- Event "canplay" in the audioElement (canplay ==> setDuration)
-audio.addEventListener('canplay', setDuration);
-function setDuration() {
-    seekBar.max = audio.duration;
-}
-//  3.4.- Event "muted" in the mutedVolume (muted => !muted)
-const mutedIcon = '<span class="material-symbols-outlined volume_muted">volume_off</span>'
-const notMutedIcon = '<span class="material-symbols-outlined volume_Notmuted">volume_up</span>'
-
-mutedVolume.addEventListener('click', () => {
-    if (mutedVolume.value === "false") {
-        mutedVolume.innerHTML = mutedIcon;
-        mutedVolume.value = "true"
-        audio.muted = true
-        elemValueVolume.classList.remove("valueNotMuted")
-        elemValueVolume.classList.add("valueMuted")
-    } else {
-        mutedVolume.innerHTML = notMutedIcon;
-        mutedVolume.value = "false"
-        audio.muted = false
-        elemValueVolume.classList.remove("valueMuted")
-        elemValueVolume.classList.add("valueNotMuted")
-    }
-})
-
-//  3.5.- Events "change volume" in the buttonVolume 
-volumeDown.addEventListener('click', () => {
-    if (audio.volume >= 0.10) {
-        audio.volume = audio.volume - 0.1;
-    } else {
-        audio.volume = 0;
-    }
-    volumenBar.value = audio.volume * 100
-    elemValueVolume.innerHTML = `${volumenBar.value}%`
-})
-volumeUp.addEventListener('click', () => {
-    if (audio.volume <= 0.9) {
-        audio.volume = audio.volume + 0.1;
-    } else {
-        audio.volume = 1;
-    }
-    volumenBar.value = audio.volume * 100
-    elemValueVolume.innerHTML = `${volumenBar.value}%`
-})
-
-// 4.-  Event "input" in the bar (input type "range) "seekBar", (input => onSeek)
-seekBar.addEventListener('input', onSeek);
-function onSeek(evt) {
-    audio.currentTime = evt.target.value;
-}
-seekBar.addEventListener('change', () => {
-    this.style = `linear-gradient('red' ${audio.currentTime}, 'transparent')`;
-})
-
-// 5.-  Event "input" in the bar (input type "range") "volumenBar", (input => onVolumenSeek)
-volumenBar.addEventListener('input', onVolumenSeek);
-function onVolumenSeek(ev) {
-    audio.volume = ev.target.value / 100;
-    elemValueVolume.innerHTML = `${ev.target.value}%`
-}
-
-//  Connect the "audio source" (AudioNode "audioElement") with the context of audio ("audioCtx"), 
+//  2.-  Connect the "audio source" (AudioNode "audioElement") with the "context of audio" ("audioCtx"), 
 //  so we define the audio source of the audio graph.
+export const audio = new Audio("../assets/mp3/John Lennon 'Imagine'.mp3");
+audio.setAttribute('src', `./assets/mp3/John Lennon 'Imagine'.mp3`)
+audio.preload = "auto"
+audio.volume = 0.5
+
+export const audioCtx = new (window.AudioContext || window.webkitAudioContext)()
 const source = audioCtx.createMediaElementSource(audio);
 const analyser = audioCtx.createAnalyser();  //  create a analyser of audio
-analyser.fftSize = 2048;  //  Fourier transform
 
-
-//  B.-  Connect the analyser with the font of audio
+//  3.-  Connect the analyser with the font of audio  (source Node ==> analyzer Node)
 source.connect(analyser);
-//  C.-  Connect the destination of audio with the analyser
+
+//  4.-  Connect the "destination of audio" with the "analyser" node  (analyzer ==> destination defect)
 analyser.connect(audioCtx.destination);
 
-//  D.-  Definition de buffer of audio and the dataArray
+//  5.-  Definition de "buffer of audio" and the "dataArray"
 const bufferLength = analyser.frequencyBinCount;
 const dataArray = new Uint8Array(bufferLength);
 
 //  E.-  Draw the exit of analycer in canvas
-function drawSound() {
-    analyser.getByteFrequencyData(dataArray);
-    canvasCtx.fillStyle = 'rgb(0, 0, 0)';
-    canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+let visualizator = "Bars"
+//  6.-  Events of select visualizator, 'change' in the "select" of visualizator  ('change' => "visualizator" is value selected)
+const optionElementVisualizator = document.querySelectorAll('.optionVisualizator')
+const visualizatorSelect = document.querySelector('#selectVisualizator')
 
-    const barWidth = (WIDTH / bufferLength) * 1.1;
-    let barHeight;
-    let x = 0;
-
-    for (let i = 0; i < bufferLength; i++) {
-        barHeight = dataArray[i] / 1.1;
-
-        //  Colors of bars
-        const g = i * 1.2 / bufferLength;
-        const b = i * 1.1 / bufferLength;
-        const redColor = 255;
-        const greenColor = 255 * 3 * g;
-        const blueColor = barHeight * 4 * b;
-        canvasCtx.fillStyle = `rgb(${redColor}, ${greenColor}, ${blueColor})`;
-        canvasCtx.fillRect(x, HEIGHT - barHeight, barWidth, barHeight);
-        x += barWidth + 1;
-    }
-
-    requestAnimationFrame(drawSound);
+visualizatorSelect.addEventListener('change', (ev) => {
+  visualizator = optionElementVisualizator[ev.target.selectedIndex].value
+  console.log(visualizator)
+})
+analyser.fftSize = 2048;  //  Fast Fourier Transform (fft)
+function typeVisualizator (parType) {
+  canvasBarCtx.font = "0.6rem Arial";
+  canvasBarCtx.fillStyle = "white";
+  canvasBarCtx.textAlign = "center";
+  canvasBarCtx.fillText(`Visualizator of ${parType}`, 68, 18);
 }
-drawSound();
+
+function drawBarsSound() {
+  let x
+  switch (visualizator) {
+    case "Bars":
+      visualizerBars(bufferLength, x)
+      break;
+    case "Hell Doom":
+      visualizatorHell(bufferLength, x)
+      break;
+    case "Fireworks":
+      visualizatorFirework(bufferLength, x)
+      break;
+    case "Circles":
+      visualizatorCircles(bufferLength)
+      break;
+    default:
+    // code block
+  }
+
+  requestAnimationFrame(drawBarsSound);
+}
+
+function visualizerBars(bufferLength, x) {
+  canvasBars.style.filter = 'blur(0px) contrast(2)'
+  analyser.fftSize = 4096;  //  Fast Fourier Transform (fft)
+  analyser.getByteFrequencyData(dataArray);
+  canvasBarCtx.fillStyle = 'rgb(0, 0, 0)';
+  canvasBarCtx.fillRect(0, 0, WIDTH_BAR, HEIGHT_BAR);
+  const barWidth = (canvasBars.width / bufferLength) + 1;
+  x = 0
+  typeVisualizator ('Bars')
+
+  for (let i = 0; i < bufferLength; i++) {
+    const barHeight = dataArray[i] * 0.62;
+    const g = i * 1.2 / bufferLength;
+    const b = i * 5;
+    const colorRed = i * barHeight / randomNumber(5, 10)
+    const colorGreen = 255 * 4 * g;
+    const colorBlue = 255 - b;
+
+    canvasBarCtx.fillStyle = `rgb(${colorRed}, ${colorGreen}, ${colorBlue})`;
+    canvasBarCtx.fillRect(x, canvasBars.height - barHeight, barWidth, barHeight);
+    canvasBarCtx.fillStyle = 'white'
+    canvasBarCtx.fillRect(x, canvasBars.height - barHeight, barWidth, 2)
+    x += barWidth + 0.45;
+  }
+}
+
+function visualizatorHell(bufferLength, x) {
+  canvasBars.style.filter = 'blur(4px) contrast(6)'
+  //  Fast Fourier Transform (fft)
+  analyser.fftSize = 512;
+  analyser.getByteFrequencyData(dataArray);
+  canvasBarCtx.fillStyle = 'rgb(0, 0, 0)';
+  canvasBarCtx.fillRect(0, 0, canvasBars.width, canvasBars.height);
+  const barWidth = ((canvasBars.width) / bufferLength) + 0.5
+  x = 0
+
+  for (let i = 0; i < bufferLength; i++) {
+    const barHeight = dataArray[i] * 0.6
+    x += barWidth + 0.2
+    //  Colors of bars
+    const colorRed = i * barHeight / 7
+    const colorGreen = i * randomNumber(2, 4)
+    const colorBlue = randomNumber(80, 255)
+    canvasBarCtx.fillStyle = 'yellow'
+    canvasBarCtx.fillRect((canvasBars.width / 2) - x, canvasBars.height - barHeight - randomNumber(6, 18), barWidth, randomNumber(4, 7))
+    const colorRGB = `rgb(${colorRed}, ${colorGreen}, ${colorBlue})`
+
+    canvasBarCtx.fillStyle = colorRGB
+    canvasBarCtx.fillRect((canvasBars.width / 2) - x, canvasBars.height - barHeight, barWidth, barHeight)
+  }
+  x = canvasBars.width / 2 - 2
+  for (let i = 0; i < bufferLength; i++) {
+    const barHeight = dataArray[i] * 0.6
+    x += barWidth + 0.2
+    //  Colors of bars
+    const colorRed = i * barHeight / 7
+    const colorGreen = i * randomNumber(2, 4)
+    const colorBlue = randomNumber(80, 255)
+    canvasBarCtx.fillStyle = 'yellow'
+    canvasBarCtx.fillRect(x, canvasBars.height - barHeight - randomNumber(6, 18), barWidth, randomNumber(4, 7))
+    const colorRGB = `rgb(${colorRed}, ${colorGreen}, ${colorBlue})`
+
+    canvasBarCtx.fillStyle = colorRGB
+    canvasBarCtx.fillRect(x, canvasBars.height - barHeight, barWidth, barHeight)
+  }
+}
+
+function visualizatorFirework(bufferLength, x) {
+  canvasBars.style.filter = 'blur(1px) contrast(4)'
+  //  Fast Fourier Transform (fft)
+  analyser.fftSize = 256;
+  analyser.getByteFrequencyData(dataArray);
+  canvasBarCtx.fillStyle = 'rgb(0, 0, 0)';
+  canvasBarCtx.fillRect(0, 0, canvasBars.width, canvasBars.height);
+  const barWidth = ((canvasBars.width / 2) / bufferLength) + 1.5
+  x = 0
+  typeVisualizator ('Fireworks')
+
+  for (let i = 0; i < bufferLength; i++) {
+    const randomGanancia = randomNumber(6, 7) / 10
+    const barHeight = dataArray[i] * randomGanancia
+    //  Colors of bars
+    const colorRed = i * barHeight / randomNumber(12, 18)
+    const colorGreen = i * randomNumber(3, 5)
+    const colorBlue = randomNumber(50, 200)
+    canvasBarCtx.fillStyle = randomColor()
+    canvasBarCtx.fillRect((canvasBars.width / 2) - x, canvasBars.height - barHeight - randomNumber(randomNumber(4, 8), randomNumber(20, 68)), barWidth, randomNumber(1, 3))
+    const colorRGB = `rgb(${colorRed}, ${colorGreen}, ${colorBlue})`
+
+    canvasBarCtx.fillStyle = colorRGB
+    canvasBarCtx.fillRect((canvasBars.width / 2) - x, canvasBars.height - barHeight, barWidth, barHeight)
+    x += barWidth + 0.2
+  }
+  x = canvasBars.width / 2
+  for (let i = 0; i < bufferLength; i++) {
+    const randomGanancia = randomNumber(6, 7) / 10
+    const barHeight = dataArray[i] * randomGanancia
+    //  Colors of bars
+    const colorRed = i * barHeight / randomNumber(12, 18)
+    const colorGreen = i * randomNumber(3, 5)
+    const colorBlue = randomNumber(50, 150)
+    canvasBarCtx.fillStyle = randomColor()
+    canvasBarCtx.fillRect(x, canvasBars.height - barHeight - randomNumber(randomNumber(4, 8), randomNumber(20, 68)), barWidth, randomNumber(1, 3))
+    const colorRGB = `rgb(${colorRed}, ${colorGreen}, ${colorBlue})`
+
+    canvasBarCtx.fillStyle = colorRGB
+    canvasBarCtx.fillRect(x, canvasBars.height - barHeight, barWidth, barHeight)
+    x += barWidth + 0.2
+  }
+}
+
+let randomX = canvasBars.width / 2
+let randomY = canvasBars.height / 2
+let randomGanancia = randomNumber(5, 9) / 10
+let contClick = 0
+let isCircle = true
+
+function appearCircle() {
+  setInterval(() => {
+    randomX = randomNumber(10, canvasBars.width - 10)
+    randomY = randomNumber(10, canvasBars.height - 10)
+    isCircle = !isCircle
+  }, 3000)
+}
+
+function visualizatorCircles(bufferLength) {
+  canvasBars.style.filter = 'blur(0px) contrast(3)'
+  canvasBars.addEventListener('mousedown', (ev) => {
+    contClick += 1
+    const arrayFFT = [64, 512, 1024, 2048, 4096, 8192]
+    const randomIndex = randomNumber(0, arrayFFT.length - 1)
+    randomGanancia = randomNumber(5, 9) / 10
+    analyser.fftSize = arrayFFT[randomIndex];
+    if(contClick < 2) {
+      appearCircle()
+    }
+  })
+  analyser.getByteFrequencyData(dataArray);
+  canvasBarCtx.fillStyle = 'rgb(0, 0, 0)';
+  canvasBarCtx.fillRect(0, 0, canvasBars.width, canvasBars.height);
+  canvasBarCtx.font = "10px Comic Sans MS";
+  canvasBarCtx.fillStyle = "red";
+  canvasBarCtx.textAlign = "center";
+  canvasBarCtx.fillText("Click the mouse here", canvasBars.width - 50, 20);
+  const barWidth = (canvasBars.width / bufferLength) * 1.1 + 1
+  typeVisualizator ('Circles')
+
+  for (let i = 0; i < bufferLength; i++) {
+    const barHeight = dataArray[i] * randomGanancia
+    canvasBarCtx.save()
+    canvasBarCtx.translate(randomX, randomY)
+    if (isCircle) {
+      canvasBarCtx.rotate(i + Math.PI * 4 / bufferLength)
+    } else {
+      canvasBarCtx.rotate(i * Math.PI * 8 / bufferLength)
+    }
+    //  Colors of circle
+    const colorHLS = 'hsl(' + i * 8 + ',' + barHeight + '%, 50%)'
+    canvasBarCtx.fillStyle = colorHLS
+    canvasBarCtx.fillRect(0, 0, barWidth, barHeight)
+    canvasBarCtx.restore()
+  }
+}
+
+drawBarsSound();
 
 
