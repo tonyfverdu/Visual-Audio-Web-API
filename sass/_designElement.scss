@@ -46,8 +46,11 @@
   font-size: $parFont-size;
   color: $parColor;
   margin: 0% auto;
-  padding: 3% 2%;
+  padding: 3% 2%;@include l.layoutFlexboxRowCenter;
+  @include l.layoutFlexboxRowCenter;
+  margin: 0% auto;
 }
+
 
 // Configuration of Image  ***********************/
 @mixin figure {

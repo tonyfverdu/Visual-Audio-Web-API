@@ -103,6 +103,8 @@ $gradientSlice:  linear-gradient(to bottom, $backgroundColorHellGray 55%, $backg
 $gradientSlice2: linear-gradient(to top, $backgroundColorHellGray 8%, $backgroundColorIniT 22%, $backgroundColorIniT2 50%, $backgroundColorIniT3);
 $gradientSlice3: linear-gradient(to top, $colorDarkBlue1 3%, $colorDarkBlue2 10%, $colorDarkBlue3 18%, $colorDarkBlue4);
 $gradientSliceBluedark: linear-gradient(to top, rgb(15, 15, 228) 3%, rgb(3, 3, 204) 10%, rgb(1, 1, 151) 20%, rgb(1, 1, 63) 30%, rgb(0, 0, 0) );
+$gradientSliceGreendark: linear-gradient(to top, rgb(15, 228, 58) 3%, rgb(3, 204, 23) 10%, rgb(1, 151, 31) 21%, rgb(1, 63, 22) 39%, rgb(0, 60, 12)78%, rgb(1, 45, 10));
+$gradientSliceRedDark: linear-gradient(to top, rgb(228, 15, 15) 3%, rgb(204, 3, 3) 10%, rgb(151, 1, 1) 21%, rgb(63, 1, 1) 39%, rgb(60, 0, 0)78%, rgb(45, 1, 1));
 $gradientSliceDark: linear-gradient(to bottom, $backgroundColorDunkelGray 3%, $backgroundColorDunkelGray2 10%, $backgroundColorDunkelGray3 20%, $backgroundColorDunkelGray4 30%, $backgroundColorDunkelBlack );
 $gradientSliceBluedark2: linear-gradient(to bottom, rgb(161, 245, 253) 3%, rgb(127, 192, 198) 10%, rgb(58, 133, 143) 20%, rgb(46, 89, 94) 30%, rgb(176, 248, 251));
 $gradientSliceDark: linear-gradient(to bottom, $backgroundColorDunkelGray 3%, $backgroundColorDunkelGray2 10%, $backgroundColorDunkelGray3 20%, $backgroundColorDunkelGray4 30%, $backgroundColorDunkelBlack );
@@ -152,8 +154,10 @@ $boxShadow6: 6px 8px 12px 2px #fafab0, inset 7px 7px 18px 3px #fb8303, 6px 6px 9
 $boxShadow6: 6px 8px 12px 2px rgba(98, 98, 98, 0.8), inset 7px 7px 18px 3px rgba(67, 67, 67, 0.8), 6px 6px 9px 9px rgba(38, 38, 38, 0.8);
 $boxShadow7: 0px 1px 2px 2px #950202, inset 7px 8px 15px 3px #fb1803, 0px 1px 3px 3px  #feb699;
 $boxShadow8: 0px 1px 2px 2px  #ff9898, inset 6px 6px 12px 0px #fb1803, 0px 1px 3px 3px  #feb699;
+$boxShadow8Dark: 0px 1px 2px 2px  #ff5757, inset 2px 2px 6px 0px #a80202, 0px 1px 2px 2px  #fb3c3c;
 $boxShadow9: 0px 1px 2px 2px rgb(184, 255, 134), inset 6px 6px 12px 0px #03fb03, 0px 1px 3px 3px #99f0b6;
-$boxShadow10: 6px 8px 12px 2px rgba(167, 253, 105, 0.8), inset 7px 7px 18px 3px #08f518eb, 6px 6px 12px 9px #0a6802;
+$boxShadow9Dark: 0px 1px 2px 2px rgb(86, 205, 2), inset 6px 6px 12px 0px #03fb03, 0px 1px 3px 3px #99f0b6;
+$boxShadow10: 6px 8px 12px 2px rgba(167, 253, 105, 0.8), inset 7px 7px 18px 3px #018209eb, 6px 6px 12px 9px #053500;
 $boxShadow11: 6px 8px 12px 2px rgba(251, 123, 123, 0.8), inset 7px 7px 18px 3px #f42411, 6px 6px 12px 9px #750202;
 $boxShadow12: 2px 2px 5px 2px rgb(184, 255, 134), inset 7px 7px 18px 3px #03fb03, 2px 3px 6px 2px #99f0b6;
 $boxShadow13: 4px 5px 7px 2px rgba(167, 253, 105, 0.8), inset 4px 5px 7px 3px #08f518eb, 4px 5px 7px 4px #0a6802;

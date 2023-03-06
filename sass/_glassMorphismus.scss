@@ -99,7 +99,7 @@ $textShadowGlassMorphismusTextGreen: 0.8rem 0.3rem 0.5rem rgb(68, 151, 71);
 }
 
 @mixin GlassMorphismus3 {
-    background: rgba(1, 62, 6, 0.3);
+    background: rgba(1, 3, 62, 0.3);
     border-radius: 9px;
     box-shadow: 1px 6px 36px rgba(0, 7, 2, 0.2);
     backdrop-filter: blur(7.7px);
@@ -108,12 +108,12 @@ $textShadowGlassMorphismusTextGreen: 0.8rem 0.3rem 0.5rem rgb(68, 151, 71);
 }
 
 @mixin GlassMorphismus4 {
-    background: rgba(1, 108, 112, 0.2);
+    background: rgba(1, 3, 112, 0.2);
     border-radius: 9px;
-    box-shadow: 1px 6px 36px rgba(1, 18, 18, 0.15);
+    box-shadow: 1px 6px 36px rgba(1, 1, 18, 0.15);
     backdrop-filter: blur(7.7px);
     -webkit-backdrop-filter: blur(7.7px);
-    border: 2px solid rgba(134, 163, 255, 0.58);
+    border: 2px solid rgba(3, 0, 35, 0.58);
 }
 
 @mixin GlassMorphismus5 {
@@ -159,4 +159,22 @@ $textShadowGlassMorphismusTextGreen: 0.8rem 0.3rem 0.5rem rgb(68, 151, 71);
     backdrop-filter: blur(7.7px);
     -webkit-backdrop-filter: blur(7.7px);
     border: 2px solid rgba(31, 118, 35, 0.68);
+}
+
+@mixin GlassMorphismus9 {
+    background: v.$gradientSliceGreendark;
+    border-radius: 6px;
+    box-shadow: v.$boxShadow9Dark;
+    backdrop-filter: blur(2.7px);
+    -webkit-backdrop-filter: blur(2.7px);
+    border: 1px solid rgba(0, 121, 6, 0.68);
+}
+
+@mixin GlassMorphismus10 {
+    background: v.$gradientSliceRedDark;
+    border-radius: 6px;
+    box-shadow: v.$boxShadow8Dark;
+    backdrop-filter: blur(2.7px);
+    -webkit-backdrop-filter: blur(2.7px);
+    border: 1px solid rgba(125, 1, 1, 0.68);
 }

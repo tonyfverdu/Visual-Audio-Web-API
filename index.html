@@ -5,69 +5,110 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Visual Play Music 1</title>
+  <title>Audio Display Analyzer</title>
   <link rel="icon" href="data:;base64,=">
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-  <link rel="stylesheet" href="./CSS/style.css">
+  <link rel="stylesheet" href="./CSS/main.css">
 </head>
 
 <body>
   <div class="contCentral">
     <div class="contTop">
-      <div class="contSelect">
-        <label for="songChose">Choose a song:</label>
-        <div class="contSelectButton">
-          <select id="selectSong" name="select" class="select">
-            <option class="optionSongs" value="./assets/mp3/John Lennon 'Imagine'.mp3" selected>Image</option>
-            <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 01 Taxman.mp3">Taxman</option>
-            <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 02 Eleanor Rigby.mp3">Eleanor Rigby</option>
-            <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 03 I'm Only Sleeping.mp3">I'm Only Sleeping</option>
-            <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 04 Love You To.mp3">Love You To</option>
-            <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 05 Here, There And Everywhere.mp3">Here, There And Everywhere</option>
-            <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 06 Yellow Submarine.mp3">Yellow Submarine</option>
-            <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 07 She Said She Said.mp3">She Said She Said</option>
-            <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 08 Good Day Sunshine.mp3">Good Day Sunshine</option>
-            <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 09 And Your Bird Can Sing.mp3">And Your Bird Can Sing</option>
-            <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 10 For No One.mp3">For No One</option>
-            <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 11 Doctor Robert.mp3">Doctor Robert</option>
-            <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 12 I Want To Tell You.mp3">I Want To Tell You</option>
-            <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 13 Got To Get You Into My Life.mp3">Got To Get You Into My Life</option>
-            <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 14 Tomorrow Newer Knows.mp3">Tomorrow Newer Knows</option>
-            <option class="optionSongs" value="./assets/albums_mp3/18 Others/Don't Let Me Down (Remastered 2009) (128 kbps).mp3">Don't Let Me Down</option>
-            <option class="optionSongs" value="./assets/albums_mp3/18 Others/Lady Madonna (Remastered 2015) (128 kbps).mp3">Lady Madonna</option>
-            <option class="optionSongs" value="./assets/albums_mp3/9 Magical Mystery Tour/The Beatles - Magical Mystery Tour - 11 All You Need Is Love.mp3">All You Need Is Love</option>
-          </select>
-          <button id="buttonSelectSong" type="submit" class="buttonSelect">Select</button>
+      <div class="contSelectFirst">
+        <label for="visualizatorChose">Choose an album and a song:</label>
+        <div class="contAlbumSong">
+          <div class="contSelect album">
+            <select id="selectAlbum" name="selectAlbum" class="select"></select>
+            <button id="buttonSelectAlbum" type="submit" class="buttonSelect">Select</button>
+          </div>
+
+          <div class="contSelect song">
+            <select id="selectSong" name="select" class="select"></select>
+            <button id="buttonSelectSong" type="submit" class="buttonSelect">Select</button>
+          </div>
         </div>
       </div>
-      <div class="contSelect">
-        <label for="visualizatorChose">Choose a Visualizator:</label>
-        <div class="contSelectButton">
-          <select id="selectVisualizator" name="select" class="select">
-            <option class="optionVisualizator" value="Bars" selected>Horizontal Bars</option>
-            <option class="optionVisualizator" value="Hell Doom">Hell Doom</option>
-            <option class="optionVisualizator" value="Fireworks">Fireworks</option>
-            <option class="optionVisualizator" value="Circles">Circles</option>
-          </select>
+
+      <div class="contSelectFirst">
+        <label for="visualizatorChose" class="labelDisplay">Choose a Display:</label>
+        <div class="contPrinDisplays">
+          <div class="contVisualizator">
+            <label for="visualizatorChose">Frequency</label>
+            <div class="contSelect">
+              <select id="selectVisuaFrec" name="selectSong" class="select">
+                <option class="optionVisualizator" value="Bars" selected>Horizontal Bars</option>
+                <option class="optionVisualizator" value="Hell Doom">Hell Doom</option>
+                <option class="optionVisualizator" value="Fireworks">Fireworks</option>
+                <option class="optionVisualizator" value="Circles Rainbow">Circles Rainbow</option>
+              </select>
+            </div>
+          </div>
+          <div class="contVisualizator">
+            <label for="visualizatorChose">Amplitude</label>
+            <div class="contSelect">
+              <select id="selectVisuaAmp" name="select" class="select">
+                <option class="optionVisualizator" value="Bars" selected>Sine wave</option>
+                <!-- <option class="optionVisualizator" value="Hell Doom">Hell Doom</option>
+                <option class="optionVisualizator" value="Fireworks">Fireworks</option>
+                <option class="optionVisualizator" value="Circles Rainbow">Circles Rainbow</option> -->
+              </select>
+            </div>
+          </div>
         </div>
       </div>
+    </div>
+    <div class="contInfoSong">
+      <figure class="figImgAlbum">
+        <img id="imageAlbumOfSong" src="./assets/images/portadas/Sgt.Pepper'sLonelyHeartsClubBandDeLuxe.jpg" alt=""
+          class="imgAlbum">
+      </figure>
+      <div class="contTitleAnimation">
+        <div class="contAnimate">
+          <span id="titleSongOfAlbum" class="labelTitle"></span>
+          <span id="vocalsOfSong" class="vocals"></span>
+        </div>
+      </div>
+      <div id="contInfoSong" class="contInfoleftNotActiv">
+        <div class="contDataTop">
+          <div class="contLabelData">
+            <span class="label">Album:</span>
+            <span id="infoAlbum" class="data"></span>
+          </div>
+        </div>
+        <div class="contDataDown">
+          <div class="contLabelData">
+            <span class="label">Year:</span>
+            <span id="infoYear" class="data"></span>
+          </div>
+          <div class="contLabelData">
+            <span class="label">Duration:</span>
+            <span id="infoDuration" class="data"></span>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <div class="contCanvas">
-      <canvas id="canvasBars" class="canvas"></canvas>
+      <button id="changeCircleBtn" type="button" class="changeCircle" data-playing="false" role="switch"
+        aria-checked="false">
+        Click Me
+      </button>
+      <canvas id="myCanvas" class="canvas"></canvas>
     </div>
 
-    <div class="audioPlayer">
-      <div class="controls">
+    <div class="contAudioPlayer">
+      <div class="controlsTop">
         <div class="contButton">
-          <button class="playPause">
+          <button id="btn-play-paused" class="playPause" data-playing="false" role="switch" aria-checked="false">
             <span class="material-symbols-outlined play">
               play_circle
             </span>
           </button>
         </div>
-        <span class="spanSeekBar CurrentSeekBar"></span>
+        <span class="spanSeekBar currentSeekBar"></span>
+
         <div class="contSeekBar">
           <span class="spanSeekBar IniSeekBar"></span>
           <input type="range" class="seekBar seekBarNotPlay"></input>
@@ -75,27 +116,132 @@
         </div>
 
         <div class="contVolumen">
-          <button type="submit" class="mutedButton">
+          <button id="toogleMutedButton" type="button" class="toogleButton">
             <span class="material-symbols-outlined volume_Notmuted">volume_up</span>
           </button>
-          <span id="valueMuted" class="valueMuted"></span>
+          <span id="percentageVolume" class="valueMuted"></span>
           <button class="volumenButton colorSpan">
             <span class="material-symbols-outlined volume_changed" id="buttonDown">volume_down_alt</span>
           </button>
-          <input type="range" class="volume"></input>
+          <input id="rangeVolume" type="range" class="rangeData" min="0" max="3.4" value="0.5" step="0.1"></input>
           <button class="volumenButton colorSpan">
             <span class="material-symbols-outlined volume_changed" id="buttonUp">volume_up</span>
           </button>
         </div>
       </div>
+
+      <div class="controlsDown">
+        <div class="contButton">
+          <button id="btn-microphone" class="playPause" data-playing="false" role="switch" aria-checked="false">
+            <span id="spanMicro" class="material-symbols-outlined microOn">mic</span>
+          </button>
+        </div>
+        <span class="spanSeekBar currentSeekBar">
+          <canvas id="canvasGain" class="canvas"></canvas>
+        </span>
+        <div class="contSeekBar">
+          <div class="contControlsFlow">
+            <div class="contButtonsFlow">
+              <button id="shuffleButton" type="button" class="buttonFlow">
+                <span class="material-symbols-outlined stereoChannel">shuffle</span>
+              </button>
+              <button id="previusButton" type="button" class="buttonFlow">
+                <span class="material-symbols-outlined stereoChannel">skip_previous</span>
+              </button>
+              <button id="resumeButton" type="button" class="buttonFlow">
+                <span class="material-symbols-outlined stereoChannel">resume</span>
+              </button>
+              <button id="nextButton" type="button" class="buttonFlow">
+                <span class="material-symbols-outlined stereoChannel">skip_next</span>
+              </button>
+              <button id="repeatButton" type="button" class="buttonFlow">
+                <span class="material-symbols-outlined stereoChannel">repeat</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div id="contStereo" class="contVolumen">
+          <button id="toogleStereoButton" type="button" class="toogleButton" data-playing="true" role="switch"
+            aria-checked="false">
+            <span class="material-symbols-outlined stereoChannel">spatial_tracking</span>
+          </button>
+          <span id="infoStereo" class="valueStereo">
+            <p id="channelLeft" class="infoChannels"></p>
+            <p id="channelRight" class="infoChannels"></p>
+          </span>
+          <button class="volumenButton changeChannel">
+            <span class="material-symbols-outlined volume_changed" id="buttonLeft">speaker</span>
+            <span class="textStereo">L</span>
+          </button>
+          <input id="pannerStereo" type="range" class="rangeData" min="-1" max="1" value="0" step="0.2"></input>
+          <button class="volumenButton changeChannel">
+            <span class="material-symbols-outlined volume_changed" id="buttonRight">speaker</span>
+            <span class="textStereo">R</span>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
+  </div>
 
+  
+  <script type="module" src="./Scripts/main.js"></script>
+  <script type="module" src="./Scripts/initialization.js"></script>
+  <script type="module" src="./Scripts/events.js"></script>
+  <script type="module" src="./Scripts/functions.js"></script>
+  <script type="module" src="./Scripts/graphic.js"></script>
+  <script type="module" src="./Scripts/analyzerFrec.js"></script>
+  <script type="module" src="./Scripts/microphone.js"></script>
 
-  <script type="module" src="./scripts/initialization.js"></script>
-  <script type="module" src="./scripts/events.js"></script>
-  <script type="module" src="./scripts/graphic.js"></script>
-  <script type="module" src="./VisualPlayAudio1.js"></script>
+  
+  <!-- <script type="module" src="./Scripts/main.js"></script> -->
+  <script type="module" src="./Scripts/amplitude.js"></script>
 </body>
 
 </html>
+
+<!-- <option class="optionSongs" value="./assets/mp3/John Lennon 'Imagine'.mp3" selected>Image</option>
+              <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 01 Taxman.mp3">Taxman</option>
+              <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 02 Eleanor Rigby.mp3">Eleanor Rigby
+              </option>
+              <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 03 I'm Only Sleeping.mp3">I'm Only
+                Sleeping</option>
+              <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 04 Love You To.mp3">Love You To
+              </option>
+              <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 05 Here, There And Everywhere.mp3">
+                Here, There And Everywhere</option>
+              <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 06 Yellow Submarine.mp3">Yellow
+                Submarine</option>
+              <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 07 She Said She Said.mp3">She Said
+                She Said</option>
+              <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 08 Good Day Sunshine.mp3">Good Day
+                Sunshine</option>
+              <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 09 And Your Bird Can Sing.mp3">And
+                Your Bird Can Sing</option>
+              <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 10 For No One.mp3">For No One
+              </option>
+              <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 11 Doctor Robert.mp3">Doctor Robert
+              </option>
+              <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 12 I Want To Tell You.mp3">I Want
+                To Tell You</option>
+              <option class="optionSongs"
+                value="./assets/mp3/The Beatles - Revolver - 13 Got To Get You Into My Life.mp3">Got To Get You Into My
+                Life</option>
+              <option class="optionSongs" value="./assets/mp3/The Beatles - Revolver - 14 Tomorrow Newer Knows.mp3">
+                Tomorrow Newer Knows</option>
+              <option class="optionSongs"
+                value="./assets/mp3/Don't Let Me Down (Remastered 2009) (128 kbps).mp3">Don't Let Me Down
+              </option>
+              <option class="optionSongs"
+                value="./assets/mp3/The Ballad Of John And Yoko (Remastered 2015) (128 kbps).mp3">The Ballad Of John And
+                Yoko
+              </option>
+              <option class="optionSongs" value="./assets/mp3/Lady Madonna (Remastered 2015) (128 kbps).mp3">Lady Madonna
+              </option>
+              <option class="optionSongs"
+                value="./assets/mp3/The Beatles - Yellow Submarine - 06 All You Need Is Love.mp3">
+                All You Need Is Love
+              </option>
+              <option class="optionSongs" value="./assets/mp3/The Beatles - Abbey Road - 01 Come Together.mp3">
+                Come Together
+              </option> -->
