@@ -11,7 +11,7 @@ export default class Microphone {
         this.analyser.minDecibels = -90;
         this.analyser.maxDecibels = -10;
 
-        this.analyser.fftSize = 512  //  Fast Fourier transform
+        this.analyser.fftSize = 1024  //  Fast Fourier transform
         const bufferLength = this.analyser.frequencyBinCount
         this.dataArray = new Uint8Array(bufferLength)
         this.microphone.connect(this.analyser)

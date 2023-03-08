@@ -13,10 +13,11 @@ import {
 import {
   playIcon, replayIcon, pauseIcon, mutedIcon, notMutedIcon, spacialRightIcon, spacialTrackingIcon,
   elemSpanMicro, elemImgAlbumOfSong, elemTitleSongOfAlbum, elemVocalsOfSong, elemInfoAlbum,
-  elemInfoYear, elemInfoDuration, elemContInfoSong
+  elemInfoYear, elemInfoDuration, elemContInfoSong, canvasGain
 } from "./graphic.js"
 import dataSongsBeatles from "./dataSongs.js"
 import { amplitudeMain } from "./amplitude.js"
+import { createCanvasPumpkin, removeCanvasPumpkin } from "./pumpkinSpeaker.js"
 
 
 // let albumIsSelected
@@ -78,6 +79,8 @@ audioElement.addEventListener("ended", () => {
 
   elemContInfoSong.classList.remove("contInfoleftActiv")
   elemContInfoSong.classList.add("contInfoleftNotActiv")
+
+  myNewCanvas.style.animation = 'none'
 }, false);
 
 // 3.1.-  Event 'change' in the "select" of albums ('change' => "fileAlbum" is value selected)
@@ -154,6 +157,8 @@ function onEnd() {
   audioState.isReplay = true;
   elemContInfoSong.classList.remove(".contInfoleftActiv")
   elemContInfoSong.classList.add(".contInfoleftNotActiv")
+
+  myNewCanvas.style.animation = 'none'
 }
 
 //  4.3.- Event "canplay" in the audioElement (canplay ==> setDuration)
@@ -256,7 +261,6 @@ stereoRight.addEventListener('click', () => {
 //  7.2.-  Event "toggle pannerStereo" in the button
 toogleStereoButton.addEventListener('click', function () {
   // "Stereo" or "mono" the audio channels depending on state
-  console.log()
   if (this.dataset.playing === "false") {
     this.innerHTML = spacialRightIcon
     this.dataset.playing = "true"
@@ -344,18 +348,30 @@ microphoneButton.addEventListener("click", function () {
     elemSpanMicro.classList.add("microOn")
     elemSpanMicro.innerHTML = 'mic'
     this.dataset.playing = "false"
-    toogleAnimation = !toogleAnimation
-    amplitudeMain()
 
+    canvasGain.classList.remove('canvasGainOn')
+    canvasGain.classList.add('canvasGainOff')
+
+    removeCanvasPumpkin()
+
+    toogleAnimation = !toogleAnimation
   } else if (this.dataset.playing === "false") {
     elemSpanMicro.classList.remove("microOn")
     elemSpanMicro.classList.add("microOff")
     elemSpanMicro.innerHTML = 'mic_off'
     this.dataset.playing = "true"
+
+    canvasGain.classList.remove('canvasGainOff')
+    canvasGain.classList.add('canvasGainOn')
+
+    createCanvasPumpkin()
+
     toogleAnimation = !toogleAnimation
-    amplitudeMain()
   }
+  amplitudeMain()
 }, false);
+
+
 
 // 10.-  Event 'change' in the canvas "myCanvasAmplitude"
 //  Analyser Amplitude: analyserAmp()

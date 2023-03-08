@@ -151,7 +151,7 @@ html {
 .contCentral > .contTop > .contSelectFirst > .contAlbumSong > .contSelect > .select:hover, .contCentral > .contTop > .contSelectFirst > .contAlbumSong > .contSelect > .select:focus {
   cursor: pointer;
   font-weight: 600;
-  border: 1px solid orange;
+  border: 1px solid rgba(255, 204, 1, 0.9);
   background-color: rgb(253, 253, 253);
 }
 .contCentral > .contTop > .contSelectFirst > .contAlbumSong > .contSelect > .select > option, .contCentral > .contTop > .contSelectFirst > .contAlbumSong > .contSelect > .select > .optionAlbums {
@@ -280,7 +280,7 @@ html {
 .contCentral > .contTop > .contSelectFirst > .contPrinDisplays > .contVisualizator > .contSelect > .select:hover, .contCentral > .contTop > .contSelectFirst > .contPrinDisplays > .contVisualizator > .contSelect > .select:focus {
   cursor: pointer;
   font-weight: 600;
-  border: 1px solid orange;
+  border: 1px solid rgba(255, 204, 1, 0.9);
   background-color: rgb(253, 253, 253);
 }
 .contCentral > .contTop > .contSelectFirst > .contPrinDisplays > .contVisualizator > .contSelect > .select > option, .contCentral > .contCentral.contTop > .contTop.contSelectFirst > .contSelectFirst.contPrinDisplays > .contAlbumSong.contVisualizator > .contSelect > .select > .optionAlbums {
@@ -1306,10 +1306,10 @@ html {
   justify-content: center;
   align-items: center;
   width: 100%;
-  border-radius: 6px;
-  background: linear-gradient(315deg, #cacaca, #f0f0f0);
-  box-shadow: -2px -2px 4px #7d7d7d, 2px 2px 4px #ffffff;
-  max-width: 3.4rem;
+  border-radius: 21px;
+  background: #e0e0e0;
+  box-shadow: inset 17px 17px 27px #b8b8b8, inset -17px -17px 27px #ffffff;
+  max-width: 3.6rem;
   height: 3rem;
   position: relative;
   text-align: center;
@@ -1321,7 +1321,7 @@ html {
   border-radius: 6px;
   padding: 0%;
   margin: 0% auto;
-  margin-right: -1.38%;
+  margin-right: -1.7%;
   box-shadow: 1px 1px 1px 0px #c3c3c3, inset 6px 6px 10px 0px #222222, 1px 1px 1px 1px #c3c3c3;
 }
 .contCentral > .contAudioPlayer > .controlsDown > .currentSeekBar > #canvasGain {
@@ -1331,16 +1331,15 @@ html {
   justify-content: center;
   align-items: center;
   width: 100%;
-  align-items: flex-end;
   box-shadow: inset 0.8rem 0.5rem 4rem 0 rgba(195, 195, 195, 0.8);
   backdrop-filter: blur(12px);
   border: 0.3rem solid rgb(170, 169, 169);
   border-left: 0.3rem solid rgb(90, 90, 90);
   border-bottom: 0.38rem solid rgb(49, 49, 49);
   border-radius: 12px;
+  padding: 4%;
   width: 100%;
   height: 100%;
-  padding: 0%;
   margin: 0% auto;
   border-radius: 6px;
   border: 1px solid rgba(63, 63, 63, 0.6);
@@ -1814,6 +1813,55 @@ html {
   color: rgba(54, 250, 54, 0.9);
   transform: scale(1.85);
   font-weight: 400;
+}
+
+.canvasGainOn {
+  background: rgba(5, 247, 5, 0.3);
+  border-radius: 9px;
+  box-shadow: 0px 1px 2px 2px rgb(184, 255, 134), inset 6px 6px 12px 0px #03fb03, 0px 1px 3px 3px #99f0b6;
+  backdrop-filter: blur(7.7px);
+  -webkit-backdrop-filter: blur(7.7px);
+  border: 2px solid rgba(70, 125, 75, 0.68);
+  padding: 1%;
+  margin: 0% auto;
+  background-color: rgba(54, 250, 54, 0.9);
+}
+
+.canvasGainOff {
+  background: rgba(244, 34, 34, 0.3);
+  border-radius: 9px;
+  box-shadow: 0px 1px 2px 2px #950202, inset 7px 8px 15px 3px #fb1803, 0px 1px 3px 3px #feb699;
+  backdrop-filter: blur(7.7px);
+  -webkit-backdrop-filter: blur(7.7px);
+  border: 2px solid rgba(125, 70, 70, 0.68);
+  padding: 1%;
+  margin: 0% auto;
+  background-color: rgba(98, 8, 8, 0.65);
+}
+
+.canvasPumpkin {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background: linear-gradient(to top, rgb(15, 228, 58) 3%, rgb(3, 204, 23) 10%, rgb(1, 151, 31) 21%, rgb(1, 63, 22) 39%, rgb(0, 60, 12) 78%, rgb(1, 45, 10));
+  border-radius: 6px;
+  box-shadow: 0px 1px 2px 2px rgb(86, 205, 2), inset 6px 6px 12px 0px #03fb03, 0px 1px 3px 3px #99f0b6;
+  backdrop-filter: blur(2.7px);
+  -webkit-backdrop-filter: blur(2.7px);
+  border: 1px solid rgba(0, 121, 6, 0.68);
+  position: absolute;
+  top: 3.2%;
+  left: 1.5%;
+  width: 100px;
+  height: 100px;
+  padding: 0%;
+  margin: 0% auto;
+  border-radius: 9px;
+  background-color: rgba(54, 250, 54, 0.9);
+  z-index: 50;
 }
 
 @keyframes rotateRecord {

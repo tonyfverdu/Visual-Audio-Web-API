@@ -3,12 +3,13 @@ import {
   elemImgAlbumOfSong, elemVocalsOfSong, elemTitleSongOfAlbum, elemInfoAlbum, elemInfoYear,
   elemInfoDuration
 } from "./graphic.js"
-import { audioElement } from "./initialization.js"
+import { contCanvas, audioElement } from "./initialization.js"
 import { uploadAlbums, uploadSongs, setInfoSong } from "./functions.js"
 import dataSongsBeatles from "./dataSongs.js"
 import dataRecordsBeatles from "./dataRecords.js"
-import analyserFrec from "./analyzerFrec.js"
-import analyserAmp from "./analyzerAmp.js"
+import displayFrecWave from "./analyzerFrec.js"
+
+import displayAmpWave from "./displayAmp.js"
 
 
 //  0.-  Upload of ini data from JSON files (albums and songs)
@@ -16,7 +17,7 @@ import analyserAmp from "./analyzerAmp.js"
 export const elemSelectAlbum = document.querySelector("#selectAlbum")
 export const elemSelectSong = document.querySelector("#selectSong")
 
-const contCanvas = document.querySelector(".contCanvas")
+// const contCanvas = document.querySelector(".contCanvas")
 export const myNewCanvas = document.createElement("canvas")
 export const newCtx = myNewCanvas.getContext("2d")
 
@@ -54,16 +55,96 @@ elemPercentageVolume.innerHTML = `${(gainNode.gain.value * 100 / 3.40).toFixed(2
 const pannerOptions = { pan: 0 };
 export const pannerStereo = new StereoPannerNode(audioCtx, pannerOptions);
 
-
 //  ********************************   AUDIO DISPLAY OF FRECUENCY AND AMPLITUDE     *************************
 //  Analyzers of audio:  frecuency and amplitude
-const analyser = audioCtx.createAnalyser();  //  Create a analyser of audio
+export const analyser = audioCtx.createAnalyser();  //  Create a analyser of audio
+let IdAnimation
 
 //  1.- Audio Displays of frecuency:  analyserFrec
- analyserFrec(myCanvas, canvasCtx, audioCtx, contCanvas, myNewCanvas, newCtx, analyser, 1024)
+const elemtSelectFrecuency = document.querySelector("#selectVisuaFrec")
+let isFrec = true
+let countCanvasFrec = 0
+let countCanvasAmp = 0
 
-//  2.- 1.- Audio Displays of amplitude:  analyserAmp 
-// analyserAmp(contCanvas, myCanvas, canvasCtx, myNewCanvas, newCtx, audioCtx, analyser, 1024)
+//  Initial animation => displayFrecWave(IdAnimation, optSelectDisplayFrec)
+let optSelectDisplayFrec = "Bars"  //  Defect visualizator:  "Bars"
+myCanvas.style.filter = 'blur(0px) contrast(3)'
+toogleCircleBtn.style.display = 'none'
+displayFrecWave(myCanvas, canvasCtx, IdAnimation, "Bars")
+
+elemtSelectFrecuency.addEventListener('change', function (ev) {
+  optSelectDisplayFrec = ev.target.value
+  //  Remove element "canvas" and create new element canvas (for performes)
+  if (countCanvasFrec < 1 && countCanvasAmp > 0) {
+    const myCanvasAmp = document.querySelector("#myCanvasAmp")
+    myCanvasAmp.remove()
+    const myCanvas = document.createElement("canvas")
+    myCanvas.setAttribute("id", "myCanvas")
+    myCanvas.classList.add("canvas")
+    contCanvas.appendChild(myCanvas)
+
+    countCanvasFrec++
+  }
+  const myCanvas = document.querySelector("#myCanvas")
+  const canvasCtx = myCanvas.getContext("2d")
+  switch (optSelectDisplayFrec) {
+    case "Bars":
+      myCanvas.style.filter = 'blur(0px) contrast(3)'
+      toogleCircleBtn.style.display = 'none'
+      displayFrecWave(myCanvas, canvasCtx, IdAnimation, optSelectDisplayFrec)
+      break;
+    case "Hell Doom":
+      myCanvas.style.filter = 'blur(2px) contrast(5)'
+      toogleCircleBtn.style.display = 'none'
+      displayFrecWave(myCanvas, canvasCtx, IdAnimation, optSelectDisplayFrec)
+      break
+    case "Fireworks":
+      myCanvas.style.filter = 'blur(0px) contrast(3)'
+      toogleCircleBtn.style.display = 'block'
+      displayFrecWave(myCanvas, canvasCtx, IdAnimation, optSelectDisplayFrec)
+      break
+    case "Circles Rainbow":
+      myCanvas.style.filter = 'blur(0px) contrast(3)'
+      toogleCircleBtn.style.display = 'block'
+      displayFrecWave(myCanvas, canvasCtx, IdAnimation, optSelectDisplayFrec)
+      break
+    default:
+      break
+  }
+  countCanvasAmp = 0
+}, false)
+
+//  2.- 1.- Audio Displays of amplitude:  displayAmpWave(optSelectDisplay)
+let optSelectDisplayAmp = "Sine Wave"
+const elemtSelectAmplitude = document.querySelector("#selectVisuaAmp")
+
+elemtSelectAmplitude.addEventListener('change', function (ev) {
+  optSelectDisplayAmp = ev.target.value
+  //  Remove element "canvas" and create new element canvas (for performes)
+  if (countCanvasAmp < 1) {
+    const myCanvas = document.querySelector("#myCanvas")
+    myCanvas.remove()
+    const TheCanvasAmp = document.createElement("canvas")
+    TheCanvasAmp.setAttribute("id", "myCanvasAmp")
+    TheCanvasAmp.classList.add("canvas")
+    contCanvas.appendChild(TheCanvasAmp)
+    countCanvasAmp++
+  }
+  const myCanvasAmp = document.querySelector("#myCanvasAmp")
+  const canvasCtxAmp = myCanvasAmp.getContext("2d")
+  switch (optSelectDisplayAmp) {
+    case "Sine Wave":
+      displayAmpWave(myCanvasAmp, canvasCtxAmp, IdAnimation, optSelectDisplayAmp)
+      break
+    case "Circles":
+      displayAmpWave(myCanvasAmp, canvasCtxAmp, IdAnimation, optSelectDisplayAmp)
+      break
+    default:
+      break
+  }
+  countCanvasFrec = 0
+}, false)
+
 
 //  *********************************************************************************************************
 

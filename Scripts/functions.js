@@ -115,7 +115,7 @@ export function imageInCanvas(urlImg, parCtx) {
   //   myNewCanvas.style.animation = 'rotateRecord 18s linear infinite'
   // }
   img.onload = function () {
-    parCtx.drawImage(img, 0, 0, elemMyCanvas.width, elemMyCanvas.height);
+    parCtx.drawImage(img, 0, 0, myCanvas.width, myCanvas.height);
   }
 }
 

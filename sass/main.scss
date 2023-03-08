@@ -575,7 +575,6 @@ html {
 
       &>.currentSeekBar {
         @include l.layoutFlexboxRowCenter;
-        ;
         @include g.GlassMorphismus3;
         @include d.configurationLabel (v.$colorHell, 0.65rem);
         max-width: 3.4rem;
@@ -889,23 +888,22 @@ html {
 
       &>.currentSeekBar {
         @include l.layoutFlexboxRowCenter;
-        @include n.neuMorphismus4;
-        max-width: 3.4rem;
+        @include n.neuMorphismus7;
+        max-width: 3.6rem;
         height: 3rem;
         @include d.configurationLabel (v.$backgroundColorDunkelGray2, 0.65rem);
         border-radius: 6px;
         padding: 0%;
         margin: 0% auto;
-        margin-right: -1.38%;
+        margin-right: -1.7%;
         box-shadow: v.$boxShadow4;
 
         &>#canvasGain {
           @include l.layoutFlexboxRowCenter;
-          align-items: flex-end;
           @include g.boxShadowGlassMorphismus4;
+          padding: 4%;
           width: 100%;
           height: 100%;
-          padding: 0%;
           margin: 0% auto;
           border-radius: 6px;
           border: 1px solid v.$backgroundColorDunkelGray4T;
@@ -1276,6 +1274,35 @@ html {
     transform: scale(1.85);
     font-weight: 400;
   }
+}
+
+.canvasGainOn {
+  @include g.GlassMorphismus6;
+  padding: 1%;
+  margin: 0% auto;
+  background-color: v.$colorGreenHell;
+}
+
+.canvasGainOff {
+  @include g.GlassMorphismus5;
+  padding: 1%;
+  margin: 0% auto;
+  background-color: v.$colorRedTrans;
+}
+
+.canvasPumpkin {
+  @include l.layoutFlexboxRowCenter;
+  @include g.GlassMorphismus9;
+  position: absolute;
+  top: 3.2%;
+  left: 1.5%;
+  width: 100px;
+  height: 100px;
+  padding: 0%;
+  margin: 0% auto;
+  border-radius: 9px;
+  background-color: v.$colorGreenHell;
+  z-index: 50;
 }
 
 //  Animations
