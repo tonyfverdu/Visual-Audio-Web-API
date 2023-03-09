@@ -14,7 +14,7 @@ export function createCanvasPumpkin() {
   canvasPumpkin.classList.add("canvasPumpkin")
   contCanvas.appendChild(canvasPumpkin)
 
-  const myMicro = new Microphone()
+  const myMicro = new Microphone(8192)
 
   const myPumpkin = new Pumpkin(
     canvasPumpkin,
@@ -25,8 +25,10 @@ export function createCanvasPumpkin() {
 
   function speakerPumpkin() {
     requestAnimationFrame(speakerPumpkin)
-    const openness = myMicro.getVolume() * 6
-    myPumpkin.drawPumpkin(pumpkinCtx, openness)
+    if(myMicro.initialized) {
+      const openness = myMicro.getVolume() * 6.8
+      myPumpkin.drawPumpkin(pumpkinCtx, openness)
+    }
   }
   speakerPumpkin()
 }

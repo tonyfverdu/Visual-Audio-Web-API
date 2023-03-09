@@ -8,7 +8,7 @@ export class Pumpkin {
   }
 
   drawPumpkin(ctx, openness) {
-    ctx.fillStyle = `rgba(${ 50 + openness * 70}, ${ 50 + openness * 70}, ${ 50 + openness * 70}, 0.5)`
+    ctx.fillStyle = `rgba(${80 + openness * 70}, ${80 + openness * 70}, ${80 + openness * 70}, 0.5)`
     ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
 
     ctx.save()
@@ -32,19 +32,19 @@ export class Pumpkin {
 
   drawHead(ctx, openness) {
     //  Head
-    ctx.fillStyle = 'rgb(10, 66, 5)'
-    ctx.fillRect(-0.2, -0.875, 0.4, 0.2)
+    ctx.fillStyle = 'rgb(10, 150, 5)'
+    ctx.fillRect(-0.2, -0.825, 0.4, 0.28)
 
     ctx.beginPath();
     ctx.fillStyle = `rgba(255, 175, 20, 0.95)`
-    ctx.ellipse(-0.6, 0.1, 0.3, 0.89, -openness * 0.18, 0, Math.PI * 2)
-    ctx.ellipse(0.6, 0.1, 0.3, 0.89, openness * 0.18, 0, Math.PI * 2)
+    ctx.ellipse(-0.6, 0.1, 0.3, 0.89, -0.1 - openness * 0.18, 0, Math.PI * 2)
+    ctx.ellipse(0.6, 0.1, 0.3, 0.89, 0.1 + openness * 0.18, 0, Math.PI * 2)
     ctx.fill()
 
     ctx.beginPath();
     ctx.fillStyle = 'rgba(250, 175, 10, 0.99)'
-    ctx.ellipse(-0.3, 0.1, 0.3, 0.89, -openness * 0.1, 0, Math.PI * 2)
-    ctx.ellipse(0.3, 0.1, 0.3, 0.89, openness * 0.1, 0, Math.PI * 2)
+    ctx.ellipse(-0.3, 0.1, 0.3, 0.89, -0.075 - openness * 0.1, 0, Math.PI * 2)
+    ctx.ellipse(0.3, 0.1, 0.3, 0.89, 0.075 + openness * 0.1, 0, Math.PI * 2)
     ctx.fill()
 
     ctx.beginPath();
@@ -56,10 +56,10 @@ export class Pumpkin {
   drawEyes(ctx, openness) {
     //Eyes
     ctx.save()
-    ctx.translate(-0.4, -0.4)
-    ctx.scale(1 + openness * 0.2, 1.2 - openness * 0.8)
+    ctx.translate(-0.4 + openness * 0.05, -0.4)
+    ctx.scale(1, 1.2 - openness * 0.8)
 
-    ctx.fillStyle = 'rgb(52, 20, 1)'
+    ctx.fillStyle = `rgb(${50 * openness * 5}, 20, 1)`
     ctx.beginPath()
     ctx.moveTo(-0.08, 0)
     ctx.lineTo(0.15, -0.12)
@@ -69,10 +69,10 @@ export class Pumpkin {
     ctx.restore()
 
     ctx.save()
-    ctx.translate(0.4, -0.4)
-    ctx.scale(1 + openness * 0.2, 1.2 - openness * 0.8)
+    ctx.translate(0.4 - openness * 0.05, -0.4)
+    ctx.scale(1, 1.2 - openness * 0.8)
 
-    ctx.fillStyle = 'rgb(52, 20, 1)'
+    ctx.fillStyle = `rgb(${50 * openness * 5}, 20, 1)`
     ctx.beginPath()
     ctx.moveTo(0.08, 0)
     ctx.lineTo(-0.15, 0.12)
