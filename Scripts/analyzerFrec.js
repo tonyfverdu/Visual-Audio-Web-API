@@ -65,6 +65,14 @@ export default function displayFrecWave(myCanvas, canvasCtx, IdAnimation, optSel
 
   // 5.-  Switch of type of frecuency visualizator ("Bars", "Hell Doom", "Fireworks", "Circles Rainbow")
   function drawFrecuencySound() {
+    cancelAnimationFrame(IdFauerwerk)
+    analyser.fftSize = 2048;
+    analyser.getByteFrequencyData(dataArray);
+
+    canvasCtx.reset()
+    canvasCtx.fillStyle = 'rgb(0, 0, 0)';
+    canvasCtx.fillRect(0, 0, myCanvas.width, myCanvas.height);
+
     switch (optSelectDisplayFrec) {
       case "Bars":
         myCanvas.style.filter = 'blur(0px) contrast(3)'
@@ -73,13 +81,13 @@ export default function displayFrecWave(myCanvas, canvasCtx, IdAnimation, optSel
         visualizerBars(bufferLength, x)
         break;
       case "Hell Doom":
-        myCanvas.style.filter = 'blur(1px) contrast(5)'
+        myCanvas.style.filter = 'blur(2.5px) contrast(4)'
         toogleCircleBtn.style.display = 'none'
         cancelAnimationFrame(IdAnimation)
         visualizerHell(bufferLength, x)
         break
       case "Fireworks":
-        myCanvas.style.filter = 'blur(1px) contrast(5)'
+        myCanvas.style.filter = 'blur(0px) contrast(3)'
         toogleCircleBtn.style.display = 'none'
         cancelAnimationFrame(IdAnimation)
         visualizerFirework(bufferLength, x)
@@ -101,13 +109,6 @@ export default function displayFrecWave(myCanvas, canvasCtx, IdAnimation, optSel
 
   //  6.1-  Functions definitions of the frecuency visualizers:  visualizerBars 
   function visualizerBars(bufferLength, x) {
-    cancelAnimationFrame(IdFauerwerk)
-    analyser.fftSize = 2048;  //  Fast Fourier Transform (fft)
-    analyser.getByteFrequencyData(dataArray);
-
-    canvasCtx.reset()
-    canvasCtx.fillStyle = 'rgb(0, 0, 0)';
-    canvasCtx.fillRect(0, 0, myCanvas.width, myCanvas.height);
     const barWidth = (myCanvas.width / bufferLength) + 0.8;
     x = 0
 
@@ -132,127 +133,128 @@ export default function displayFrecWave(myCanvas, canvasCtx, IdAnimation, optSel
 
   //  6.2-  Functions definitions of the frecuency visualizers:  visualizatorHell 
   function visualizerHell(bufferLength, x) {
-    cancelAnimationFrame(IdFauerwerk)
-    //  Fast Fourier Transform (fft)
-    analyser.fftSize = 2048;
-    analyser.getByteFrequencyData(dataArray);
-    canvasCtx.fillStyle = 'rgb(0, 0, 0)';
-    canvasCtx.fillRect(0, 0, myCanvas.width, myCanvas.height);
-    const barWidth = (myCanvas.width / bufferLength) + 0.5
-    x = 0
+    const barWidth = (myCanvas.width / bufferLength) + 0.9
+
     const colorFire = ['red', 'rgb(255, 51, 0)', 'rgb(255, 128, 128)', 'rgb(255, 180, 180)', 'orange', 'rgb(255, 102, 102)', 'rgb(255, 153, 153)', 'rgb(204, 255, 102)',
       'rgb(204, 255, 51)', 'rgb(255, 255, 153)', 'rgb(255, 255, 102)', 'rgb(255, 255, 0)', 'rgb(230, 255, 230)', 'rgb(255, 230, 230)', 'rgb(255, 255, 230)', 'white']
 
+    x = 0
     for (let i = 0; i < bufferLength; i++) {
       const barHeight = dataArray[i] * 0.6
 
       //  Colors of bars
-      const colorRed = i * barHeight / 5
-      const colorGreen = i * randomNumber(2, 4)
-      const colorBlue = randomNumber(80, 255)
+      const colorRed = i * barHeight / 4
+      const colorGreen = i * randomNumber(3, 4)
+      const colorBlue = randomNumber(50, 255)
 
       const indexColorFire = randomNumber(0, colorFire.length - 1)
       canvasCtx.fillStyle = colorFire[indexColorFire]
-      canvasCtx.fillRect((myCanvas.width / 2) - x, myCanvas.height - barHeight - randomNumber(6, 24), barWidth, randomNumber(4, 9))
+      canvasCtx.fillRect((myCanvas.width / 2) - x, myCanvas.height - barHeight - randomNumber(8, 36), barWidth, randomNumber(2, 12))
+
       const colorRGB = `rgb(${colorRed}, ${colorGreen}, ${colorBlue})`
       canvasCtx.fillStyle = colorRGB
       canvasCtx.fillRect((myCanvas.width / 2) - x, myCanvas.height - barHeight, barWidth, barHeight)
-      x += barWidth + 0.5
+      x += barWidth + 0.7
     }
-    x = myCanvas.width / 2 - 1
+
+    x = myCanvas.width / 2
     for (let i = 0; i < bufferLength; i++) {
       const barHeight = dataArray[i] * 0.6
 
       //  Colors of bars
       const colorRed = i * barHeight / 5
-      const colorGreen = i * randomNumber(2, 4)
-      const colorBlue = randomNumber(80, 255)
+      const colorGreen = i * randomNumber(3, 4)
+      const colorBlue = randomNumber(50, 255)
 
       const indexColorFire = randomNumber(0, colorFire.length - 1)
       canvasCtx.fillStyle = colorFire[indexColorFire]
-      canvasCtx.fillRect(x, myCanvas.height - barHeight - randomNumber(6, 24), barWidth, randomNumber(4, 9))
+      canvasCtx.fillRect(x, myCanvas.height - barHeight - randomNumber(8, 36), barWidth, randomNumber(2, 12))
+
       const colorRGB = `rgb(${colorRed}, ${colorGreen}, ${colorBlue})`
       canvasCtx.fillStyle = colorRGB
       canvasCtx.fillRect(x, myCanvas.height - barHeight, barWidth, barHeight)
-      x += barWidth + 0.5
+      x += barWidth + 0.7
     }
   }
 
   //  6.3-  Functions definitions of the frecuency visualizers:  visualizatorFirework 
   function visualizerFirework(bufferLength, x) {
-    cancelAnimationFrame(IdFauerwerk)
-    //  Fast Fourier Transform (fft)
-    analyser.fftSize = 2048;
-    analyser.getByteFrequencyData(dataArray);
-    canvasCtx.fillStyle = 'rgb(0, 0, 0)';
-    canvasCtx.fillRect(0, 0, myCanvas.width, myCanvas.height);
-    let barWidth = ((myCanvas.width / 2) / bufferLength) + 1
-    x = 0
+    let barWidth = ((myCanvas.width / 2) / bufferLength) + 0.9
 
+    x = 0
     for (let i = 0; i < bufferLength; i++) {
-      const randomGanancia = randomNumber(3, 6) / 8
+      const randomGanancia = randomNumber(6, 8) / 10
       const barHeight = dataArray[i] * randomGanancia
-      //  Colors of bars
-      canvasCtx.fillStyle = randomColor()
-      canvasCtx.fillRect((myCanvas.width / 2) - x, myCanvas.height - barHeight - randomNumber(randomNumber(4, 8), randomNumber(20, 68)), barWidth, randomNumber(5, 30) / 10)
       const colorHSL = 'hsl(' + i * 4 + ',100%, 50%'
+
       canvasCtx.lineCap = "round";
       canvasCtx.fillStyle = colorHSL
-      canvasCtx.fillRect(x, myCanvas.height - barHeight, barWidth, barHeight)
-      x += barWidth + 1
+      canvasCtx.fillRect((myCanvas.width / 2) - x, myCanvas.height - barHeight, barWidth, barHeight)
+
+      //  Colors of bars
+      canvasCtx.fillStyle = randomColor()
+      canvasCtx.fillRect((myCanvas.width / 2) - x, myCanvas.height - barHeight - randomNumber(randomNumber(2, 8), randomNumber(20, 68)), barWidth, randomNumber(5, 30) / 10)
+      x += barWidth + 0.6
     }
+
     x = myCanvas.width / 2
     for (let i = 0; i < bufferLength; i++) {
-      const randomGanancia = randomNumber(4, 6) / 9
+      const randomGanancia = randomNumber(6, 8) / 10
       const barHeight = dataArray[i] * randomGanancia
-      //  Colors of bars
-      canvasCtx.fillStyle = randomColor()
-      canvasCtx.fillRect(x, myCanvas.height - barHeight - randomNumber(randomNumber(4, 8), randomNumber(20, 68)), barWidth, randomNumber(5, 30) / 10)
-      const colorHSL = 'hsl(' + i * 4 + ',100%, 50%'
+
       canvasCtx.lineCap = "round";
+      const colorHSL = 'hsl(' + i * 4 + ',100%, 50%'
       canvasCtx.fillStyle = colorHSL
       canvasCtx.fillRect(x, myCanvas.height - barHeight, barWidth, barHeight)
-      x += barWidth + 1
+
+      //  Colors of bars
+      canvasCtx.fillStyle = randomColor()
+      canvasCtx.fillRect(x, myCanvas.height - barHeight - randomNumber(randomNumber(2, 8), randomNumber(20, 68)), barWidth, randomNumber(5, 30) / 10)
+      x += barWidth + 0.6
     }
   }
 
   //  6.4-  Functions definitions of the frecuency visualizers:  visualizatorCircles 
   let randomX = myCanvas.width / 2
   let randomY = myCanvas.height / 2
-  let randomGanancia = randomNumber(4, 5) / 10
+  let randomGanancia = randomNumber(5, 8) / 10
+  const colorBackCanvas = ['white', 'gray', 'darkred', 'purple', 'navy', 'black']
+  let colorCanvas = 'black'
   let contClick = 0
   let isCircle = true
-  let colorCanvas = 'rgb(0, 0, 0)'
   barWidth = (myCanvas.width / bufferLength) * randomNumber(1, 3) + randomNumber(1, 3)
   let barHeight
-  let Fauerwerk = true
+
+  let Fauerwerk = false
   let toogleFeuerwerk = false
   let IdFauerwerk
 
   function appearCircle() {
     IdFauerwerk = requestAnimationFrame(appearCircle)
 
-    myCanvas.style.filter = `blur(${randomNumber(0, 1)}px) contrast(${randomNumber(1, 2)})`
+    myCanvas.style.filter = `blur(${randomNumber(0, 2)}px) contrast(${randomNumber(1, 3)})`
     randomX = randomNumber(4, myCanvas.width - 4)
     randomY = randomNumber(4, myCanvas.height - 4)
     circle(randomX, randomY, barWidth)
     isCircle = !isCircle
-
   }
-  function circle(parRandomX, parRandomY, barWidth) {
-    barWidth = (myCanvas.width / bufferLength) * randomNumber(1, 3) + randomNumber(2, 4)
+
+  function circle(bufferLength, parRandomX, parRandomY, barWidth) {
+    randomGanancia = randomNumber(5, 8) / 10
     for (let i = 0; i < bufferLength; i++) {
       barHeight = dataArray[i] * randomGanancia
+
       canvasCtx.save()
       canvasCtx.translate(parRandomX, parRandomY)
+
       if (toogleCircleBtn.dataset.playing === "true") {
         const hue = i * 10
         canvasCtx.fillStyle = 'hsl(' + hue + ',100%,50%)'
         canvasCtx.beginPath();
-        canvasCtx.rotate(i + Math.PI * 6 / bufferLength)
+        canvasCtx.rotate(i + Math.PI * 8 / bufferLength)
         canvasCtx.arc(randomNumber(0, 20), barHeight * 0.4, barHeight * 0.4, 0, Math.PI / randomNumber(6, 8))
         canvasCtx.fill()
-        if (Fauerwerk) {
+        if (toogleFeuerwerk) {
           canvasCtx.arc(0, barHeight * 2, barHeight / 80, 0, Math.PI * 2)
           canvasCtx.fill()
         }
@@ -266,45 +268,46 @@ export default function displayFrecWave(myCanvas, canvasCtx, IdAnimation, optSel
         const hue = i * 1.5
         canvasCtx.fillStyle = 'hsl(' + hue + ',100%,' + barHeight / 1.08 + '%)'
         canvasCtx.fillRect(0, 0, barWidth, barHeight)
+
       }
       canvasCtx.restore()
     }
   }
 
-  function visualizerCircles() {
-    cancelAnimationFrame(IdFauerwerk)
-    contClick += 1
-    //  Fast Fourier Transform (fft)
-    const arrayFFT = [512, 1024, 2048, 4096]
-    const randomIndex = randomNumber(0, arrayFFT.length - 1)
-    analyser.fftSize = arrayFFT[randomIndex];
-    if (contClick < 2) {
-      appearCircle()
-    }
-    analyser.getByteFrequencyData(dataArray);
-    canvasCtx.fillStyle = colorCanvas;
-    canvasCtx.fillRect(0, 0, myCanvas.width, myCanvas.height);
-    circle(randomX, randomY, barWidth)
-  }
-
   toogleCircleBtn.addEventListener('click', function () {
     // "Black" or "random" the background color of canvas depending on state
-    myCanvas.style.backgroundColor = colorCanvas
-    if (Fauerwerk) {
-      this.dataset.playing = "false"  
-    } else if (!Fauerwerk) {
-      if(!toogleFeuerwerk) {
-        this.dataset.playing = "false"
-      } else {
-        this.dataset.playing = "true" 
-      }
-    } else {
-      this.dataset.playing = "true" 
+    const indexColor = randomNumber(0, colorBackCanvas.length)
+    colorCanvas = colorBackCanvas[indexColor]
+    canvasCtx.fillStyle = colorCanvas
+
+    //  Change form of circle:  Normal => Fauerwerk
+    //  Is this a Fauerwerk?
+    if (Fauerwerk) {                    //  <<==  Yes, it's
+      this.dataset.playing = "true"
+    } else {                            //  <<==  No, it's not
+      this.dataset.playing = "false"
+      toogleFeuerwerk = !toogleFeuerwerk
     }
     appearCircle()
-    toogleFeuerwerk = !toogleFeuerwerk
     Fauerwerk = !Fauerwerk
   }, false)
 
+  function visualizerCircles(bufferLength) {
+    contClick += 1
+
+    //  Fast Fourier Transform (fft)
+    const arrayFFT = [512, 1024, 2048, 4096]
+    const randomIndex = randomNumber(0, arrayFFT.length - 1)
+    analyser.fftSize = arrayFFT[randomIndex]
+
+    if (contClick < 2) appearCircle()
+
+    canvasCtx.fillStyle = colorCanvas
+    canvasCtx.fillRect(0, 0, myCanvas.width, myCanvas.height)
+    barWidth = (myCanvas.width / bufferLength) * randomNumber(1, 3) + randomNumber(2, 4)
+    circle(bufferLength, randomX, randomY, barWidth)
+  }
+
+  //  ****************************************************  function loop draw analyzer:  drawFrecuencySound()
   drawFrecuencySound()
 }
