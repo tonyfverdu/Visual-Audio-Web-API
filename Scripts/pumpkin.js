@@ -1,4 +1,3 @@
-const canvasPumpkin = document.querySelector("#canvasPumpkin")
 export class Pumpkin {
   constructor(canvas, x, y, rad) {
     this.canvas = canvas,

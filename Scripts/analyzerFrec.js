@@ -7,12 +7,11 @@ import { randomNumber, randomColor, imageInCanvas } from "./functions.js"
 //  Analyser Frecuency:  displayFrecWave()
 export default function displayFrecWave(myCanvas, canvasCtx, IdAnimation, optSelectDisplayFrec) {
   //  0.-  Config the System of Audio
-  //  1.-  Definition of variables of analyser  (get frecuency of the sound audioNode with:  frequencyBinCount)
+  //  1.-  Definition of variables of analyser
   analyser.minDecibels = -90
   analyser.maxDecibels = -10
 
-  analyser.fftSize = 2048  //  Fast Fourier Transform (fft)
-  //     1.-   Connects of AudioNodes:
+  //     1.-   Connects of AudioNodes
   //     1.1-  Connect the "track" (sound of font audioNode) to the node of Gain: "gainNode" (track => gainNode)
   track.connect(gainNode);
   //     1.2.- Connect the "gainNode" to the audioNode: "pannerStereo" (gainNode => pannerStereo)
@@ -69,10 +68,6 @@ export default function displayFrecWave(myCanvas, canvasCtx, IdAnimation, optSel
     analyser.fftSize = 2048;
     analyser.getByteFrequencyData(dataArray);
 
-    canvasCtx.reset()
-    canvasCtx.fillStyle = 'rgb(0, 0, 0)';
-    canvasCtx.fillRect(0, 0, myCanvas.width, myCanvas.height);
-
     switch (optSelectDisplayFrec) {
       case "Bars":
         myCanvas.style.filter = 'blur(0px) contrast(3)'
@@ -109,6 +104,10 @@ export default function displayFrecWave(myCanvas, canvasCtx, IdAnimation, optSel
 
   //  6.1-  Functions definitions of the frecuency visualizers:  visualizerBars 
   function visualizerBars(bufferLength, x) {
+    canvasCtx.reset()
+    canvasCtx.fillStyle = 'rgb(0, 0, 0)'
+    canvasCtx.fillRect(0, 0, myCanvas.width, myCanvas.height)
+
     const barWidth = (myCanvas.width / bufferLength) + 0.8;
     x = 0
 
@@ -133,6 +132,10 @@ export default function displayFrecWave(myCanvas, canvasCtx, IdAnimation, optSel
 
   //  6.2-  Functions definitions of the frecuency visualizers:  visualizatorHell 
   function visualizerHell(bufferLength, x) {
+    canvasCtx.reset()
+    canvasCtx.fillStyle = 'rgb(0, 0, 0)'
+    canvasCtx.fillRect(0, 0, myCanvas.width, myCanvas.height)
+
     const barWidth = (myCanvas.width / bufferLength) + 0.9
 
     const colorFire = ['red', 'rgb(255, 51, 0)', 'rgb(255, 128, 128)', 'rgb(255, 180, 180)', 'orange', 'rgb(255, 102, 102)', 'rgb(255, 153, 153)', 'rgb(204, 255, 102)',
@@ -179,6 +182,10 @@ export default function displayFrecWave(myCanvas, canvasCtx, IdAnimation, optSel
 
   //  6.3-  Functions definitions of the frecuency visualizers:  visualizatorFirework 
   function visualizerFirework(bufferLength, x) {
+    canvasCtx.reset()
+    canvasCtx.fillStyle = 'rgb(0, 0, 0)'
+    canvasCtx.fillRect(0, 0, myCanvas.width, myCanvas.height)
+
     let barWidth = ((myCanvas.width / 2) / bufferLength) + 0.9
 
     x = 0
@@ -293,6 +300,10 @@ export default function displayFrecWave(myCanvas, canvasCtx, IdAnimation, optSel
   }, false)
 
   function visualizerCircles(bufferLength) {
+    canvasCtx.reset()
+    canvasCtx.fillStyle = 'rgb(0, 0, 0)'
+    canvasCtx.fillRect(0, 0, myCanvas.width, myCanvas.height)
+
     contClick += 1
 
     //  Fast Fourier Transform (fft)

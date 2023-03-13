@@ -55,29 +55,33 @@ elemPercentageVolume.innerHTML = `${(gainNode.gain.value * 100 / 3.40).toFixed(2
 const pannerOptions = { pan: 0 };
 export const pannerStereo = new StereoPannerNode(audioCtx, pannerOptions);
 
+
 //  ********************************   AUDIO DISPLAY OF FRECUENCY AND AMPLITUDE     *************************
-//  Analyzers of audio:  frecuency and amplitude
+//  Analyzers of audio:  frecuency and amplitude of wave
 export const analyser = audioCtx.createAnalyser();  //  Create a analyser of audio
-let IdAnimation
+let IdAnimation   //  Last animation ID number
+
+let countCanvasFrec = 0   //  Counter of canvas of frecuency
+let countCanvasAmp = 0    //  Counter of canvas of amplitude
 
 //  1.- Audio Displays of frecuency:  analyserFrec
 const elemtSelectFrecuency = document.querySelector("#selectVisuaFrec")
-let isFrec = true
-let countCanvasFrec = 0
-let countCanvasAmp = 0
 
-//  Initial animation => displayFrecWave(IdAnimation, optSelectDisplayFrec)
+//  1.1.-  Initial animation of application => displayFrecWave(IdAnimation, optSelectDisplayFrec)
 let optSelectDisplayFrec = "Bars"  //  Defect visualizator:  "Bars"
 myCanvas.style.filter = 'blur(0px) contrast(3)'
 toogleCircleBtn.style.display = 'none'
 displayFrecWave(myCanvas, canvasCtx, IdAnimation, "Bars")
 
+//  1.2.-  Event of "change" of graphic of frecuency
 elemtSelectFrecuency.addEventListener('change', function (ev) {
   optSelectDisplayFrec = ev.target.value
-  //  Remove element "canvas" and create new element canvas (for performes)
+
+  //  1.3.-  Remove element "canvas" and create new element "canvas" (for best performes)
   if (countCanvasFrec < 1 && countCanvasAmp > 0) {
     const myCanvasAmp = document.querySelector("#myCanvasAmp")
     myCanvasAmp.remove()
+
     const myCanvas = document.createElement("canvas")
     myCanvas.setAttribute("id", "myCanvas")
     myCanvas.classList.add("canvas")
@@ -87,6 +91,7 @@ elemtSelectFrecuency.addEventListener('change', function (ev) {
   }
   const myCanvas = document.querySelector("#myCanvas")
   const canvasCtx = myCanvas.getContext("2d")
+  //  1.4.-  Select type of visualizator
   switch (optSelectDisplayFrec) {
     case "Bars":
       myCanvas.style.filter = 'blur(0px) contrast(3)'
@@ -114,24 +119,33 @@ elemtSelectFrecuency.addEventListener('change', function (ev) {
   countCanvasAmp = 0
 }, false)
 
+
 //  2.- 1.- Audio Displays of amplitude:  displayAmpWave(optSelectDisplay)
-let optSelectDisplayAmp = "Sine Wave"
+let optSelectDisplayAmp = "Sine Wave"   //  Defect visualizator:  "Sine Wave"
+
+//  2.1.- Audio Displays of amplitude (volume):  displayAmp
 const elemtSelectAmplitude = document.querySelector("#selectVisuaAmp")
 
+//  2.2.-  Event of "change" of graphic of amplitude
 elemtSelectAmplitude.addEventListener('change', function (ev) {
   optSelectDisplayAmp = ev.target.value
-  //  Remove element "canvas" and create new element canvas (for performes)
+
+  //  2.3.-  Remove element "canvas" and create new element "canvas" (for best performes)
   if (countCanvasAmp < 1) {
     const myCanvas = document.querySelector("#myCanvas")
     myCanvas.remove()
+
     const TheCanvasAmp = document.createElement("canvas")
     TheCanvasAmp.setAttribute("id", "myCanvasAmp")
     TheCanvasAmp.classList.add("canvas")
     contCanvas.appendChild(TheCanvasAmp)
+
     countCanvasAmp++
   }
   const myCanvasAmp = document.querySelector("#myCanvasAmp")
   const canvasCtxAmp = myCanvasAmp.getContext("2d")
+
+  //  2.4.-  Select type of visualizator
   switch (optSelectDisplayAmp) {
     case "Sine Wave":
       displayAmpWave(myCanvasAmp, canvasCtxAmp, IdAnimation, optSelectDisplayAmp)
@@ -145,9 +159,9 @@ elemtSelectAmplitude.addEventListener('change', function (ev) {
   countCanvasFrec = 0
 }, false)
 
+//  ******************************** ************************************************************************
 
 //  *********************************************************************************************************
-
 
 ////  Theory Audio Web API
 /*

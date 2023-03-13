@@ -1,6 +1,8 @@
 {
   "type": "module",
   "dependencies": {
+    "country-flag-icons": "^1.5.5",
+    "node": "^18.14.0",
     "sass": "^1.58.0"
   },
   "devDependencies": {

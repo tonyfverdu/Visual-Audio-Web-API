@@ -19,6 +19,8 @@ import dataSongsBeatles from "./dataSongs.js"
 import { amplitudeMain } from "./amplitude.js"
 import { createCanvasPumpkin, removeCanvasPumpkin } from "./pumpkinSpeaker.js"
 
+import { createContSpeech, deleteContSpeech } from "./SpeedRecognizer/speedchrecognizer.js"
+
 
 // let albumIsSelected
 let fileAlbumName
@@ -351,10 +353,12 @@ microphoneButton.addEventListener("click", function () {
 
     canvasGain.classList.remove('canvasGainOn')
     canvasGain.classList.add('canvasGainOff')
-
+    
+    deleteContSpeech()
     removeCanvasPumpkin()
 
     toogleAnimation = !toogleAnimation
+
   } else if (this.dataset.playing === "false") {
     elemSpanMicro.classList.remove("microOn")
     elemSpanMicro.classList.add("microOff")
@@ -364,213 +368,10 @@ microphoneButton.addEventListener("click", function () {
     canvasGain.classList.remove('canvasGainOff')
     canvasGain.classList.add('canvasGainOn')
 
+    createContSpeech()
     createCanvasPumpkin()
 
     toogleAnimation = !toogleAnimation
   }
   amplitudeMain()
 }, false);
-
-
-
-// 10.-  Event 'change' in the canvas "myCanvasAmplitude"
-//  Analyser Amplitude: analyserAmp()
-// export function analyserAmp(parCanvas, parCtxCanvas, parAudioCtx, parContCanvas, parMyNewCanvas, parNewCtx, parAnalyser, parfftSize) {
-//   const toogleCircleBtn = document.querySelector("#changeCircleBtn")
-
-//   //  1.-   Connects of AudioNodes:
-//   //  1.1-  Connect the "track" (sound of font audioNode) to the node of Gain: "gainNode" (track => gainNode)
-//   track.connect(gainNode);
-//   //  1.2.- Connect the "gainNode" to the audioNode: "pannerStereo" (gainNode => pannerStereo)
-//   gainNode.connect(pannerStereo)
-//   //  1.3.-  Connect the audioNode "pannerStereo" to the audioNode "analyser" (pannerStereo ==> analyzer Node)
-//   pannerStereo.connect(parAnalyser);
-//   //  1.4.-  Connect the node "analyser" to "destination" of system (speakers) (analyser => audioCtx.destination)
-//   parAnalyser.connect(parAudioCtx.destination)
-
-//   //  2.-  Definition of variables of analyser  (get frecuency of the sound audioNode with:  frequencyBinCount)
-//   const bufferLength = parAnalyser.frequencyBinCount;
-//   const dataArray = new Uint8Array(bufferLength);
-
-//   let visualizator = "Sine wave"  //  Defect visualizator:  "Bars"
-
-//   // 3.2-   Events of select visualizator, 'change' in the "select" of visualizator  ('change' => "visualizator" is value selected)
-//   const optionElemVisualizator = document.querySelectorAll('.optionVisualizator')
-//   const visualizatorSelect = document.querySelector('#selectVisuaAmp')
-
-//   visualizatorSelect.addEventListener('change', (ev) => {
-//     visualizator = optionElemVisualizator[ev.target.selectedIndex].value
-//   })
-
-//   // 3.3.-  Select Fast Fourier transfrorm size (fftSize)
-//   parAnalyser.fftSize = parfftSize;  //  Fast Fourier Transform (fft)
-
-//   // 4.-  Style of parCanvas, put image opf album in the newcanvas
-//   function newCanvas(parCanvas) {
-//     const styleNewCanvas = {
-//       display: 'flex',
-//       position: 'absolute',
-//       top: '15px',
-//       right: '15px',
-//       width: '120px',
-//       height: '120px',
-//       padding: '0%',
-//       margin: '0% auto',
-//       borderRadius: '50%',
-//       border: '1px solid v.$backgroundColorHellGrayT',
-//       backgroundColor: 'black',
-//       zIndex: '50'
-//     }
-//     for (const atributteCSS in styleNewCanvas) {
-//       parCanvas.style[atributteCSS] = styleNewCanvas[atributteCSS]
-//     }
-//     parContCanvas.appendChild(parCanvas)
-//   }
-
-//   newCanvas(parMyNewCanvas)
-//   imageInCanvas(urlImgSong, parNewCtx)
-
-//   // 5.-  Switch of type of frecuency visualizator ("Bars", "Hell Doom", "Fireworks", "Circles Rainbow")
-//   function drawAmplitudeSound() {
-//     let x
-//     switch (visualizator) {
-//       case "Sine wave":
-//         toogleCircleBtn.style.display = 'none'
-//         visualizerSine(bufferLength, x)
-//         // visualizerBars(bufferLength, x)
-//         break;
-//       case "Hell Doom":
-//         toogleCircleBtn.style.display = 'none'
-//         visualizatorHell(bufferLength, x)
-//         break
-//       case "Fireworks":
-//         toogleCircleBtn.style.display = 'none'
-//         visualizatorFirework(bufferLength, x)
-//         break
-//       case "Circles Rainbow":
-//         toogleCircleBtn.style.display = 'block'
-//         visualizatorCircles(bufferLength)
-//         // visualizator2(bufferLength)
-//         break
-//       case "no se":
-//         toogleCircleBtn.style.display = 'none'
-//         break
-//       default:
-//       // code block
-//     }
-//     requestAnimationFrame(drawAmplitudeSound);
-//   }
-
-//   //  6.1-  Functions definitions of the frecuency visualizers:  visualizerBars 
-//   function visualizerBars(bufferLength, x) {
-//     parCanvas.style.filter = 'blur(0px) contrast(3)'
-//     parAnalyser.fftSize = parfftSize;  //  Fast Fourier Transform (fft)
-//     parAnalyser.getByteFrequencyData(dataArray);
-//     parCtxCanvas.reset()
-//     parCtxCanvas.fillStyle = 'rgb(0, 0, 0)';
-//     parCtxCanvas.fillRect(0, 0, WIDTH, HEIGHT);
-//     const barWidth = (parCanvas.width / bufferLength) + 0.5;
-//     x = 0
-
-//     for (let i = 0; i < bufferLength; i++) {
-//       const barHeight = dataArray[i] * 0.5
-//       const g = i * 1.5 / bufferLength
-//       const b = i * 1.5
-//       const colorRed = i * barHeight / randomNumber(5, 6)
-//       const colorGreen = 255 * 3 * g
-//       const colorBlue = 255 - b
-
-//       const colorRandom = `rgb(${colorRed}, ${colorGreen}, ${colorBlue})`
-//       parCtxCanvas.fillStyle = colorRandom
-//       parCtxCanvas.fillRect(x, parCanvas.height - barHeight, barWidth, barHeight);
-//       parCtxCanvas.beginPath()
-//       parCtxCanvas.fillStyle = "white"
-//       parCtxCanvas.arc(x, parCanvas.height - barHeight - 3, 0.5, 0, Math.PI * 2)
-//       parCtxCanvas.fill()
-//       x += barWidth + 0.6;
-//     }
-//   }
-
-//   let bars = []
-//   let toogleLoop = false
-
-//   function visualizerSine(bufferLength, x) {
-//     //  1.-  Class Bar
-//     class Bar {
-//       constructor(theCanvas, theCtxCanvas, posX, posY, barWidth, barHeight, barColor, index) {
-//         this.canvas = theCanvas
-//         this.contextCanvas = theCtxCanvas
-//         this.posX = posX
-//         this.posY = posY
-//         this.barWidth = barWidth
-//         this.barHeight = barHeight
-//         this.barColor = barColor
-//         this.index = index
-//       }
-
-//       update(micInput) {
-//         const sound = micInput * 165
-//         if (sound > 0 && sound > this.barHeight) {
-//           this.barHeight = sound
-//         } else if (sound > 0 && sound > this.barHeight) {
-//           this.barHeight = this.barHeight * 0.99
-//         } else if (sound < 0 && sound < this.barHeight) {
-//           this.barHeight = sound
-//         } else {
-//           this.barHeight = this.barHeight * 0.99
-//         }
-//       }
-
-//       drawMicrophone(ctxCanvas) {
-//         ctxCanvas.fillStyle = this.barColor
-//         ctxCanvas.fillRect(this.posX, this.posY, this.barWidth, this.barHeight)
-//       }
-
-//       drawVisualizator(ctxCanvas) {  // (ctxCanvas, volume)
-//         ctxCanvas.fillStyle = this.barColor
-//         ctxCanvas.fillRect(this.posX, this.posY, this.barWidth, this.barHeight)
-//       }
-//     }
-
-//     const myMicro = new Microphone()
-//     const bars = []
-
-//     function createBars(parCanvas, parCtxCanvas) {
-//       for (let i = 0; i < 256; i++) {
-//         const colorsBar = 'hsl(' + i * 2 + ', 100%, 50%)'
-//         bars.push(new Bar(parCtxCanvas, parCtxCanvas, i * 2 * parCanvas.width / 256, parCanvas.height / 2, parCanvas.width * 2 / 256, 0, colorsBar, i))
-//       }
-//     }
-
-//     createBars(parCanvas, parCtxCanvas)
-//     ///////////////////////////////////////////////
-
-
-//     //  1.-  Function of animation by amplitude loop
-//     function animationLoopCanvas() {
-//       if (myMicro.initialized) {
-//         parCtxCanvas.clearRect(0, 0, parCanvas.width, parCanvas.height)
-//         parCtxCanvas.fillStyle = "black"
-//         parCtxCanvas.fillRect(0, 0, parCanvas.width, parCanvas.height)
-//         const samples = myMicro.getSamples()
-//         bars.forEach(function (bar, i) {
-//           bar.update(samples[i])
-//           bar.drawVisualizator(parCtxCanvas)
-//         })
-//       }
-//       if (toogleAnimation) {
-//         requestAnimationFrame(animationLoopCanvasGain)
-//       } else if (!toogleAnimation) {
-//         cancelAnimationFrame(animationLoopCanvasGain)
-//         parCtxCanvas.reset()
-//         parCtxCanvas.fillStyle = "black"
-//         parCtxCanvas.fillRect(0, 0, parCanvas.width, parCanvas.height)
-//       }
-//     }
-//     animationLoopCanvas()
-//   }
-
-//   //  
-//   drawAmplitudeSound()
-
-// }

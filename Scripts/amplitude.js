@@ -1,5 +1,5 @@
 import Microphone from "./microphone.js"
-import { canvasGain, ctxCanvasGain, } from "./graphic.js"
+import { canvasGain, ctxCanvasGain } from "./graphic.js"
 import { toogleAnimation } from "./events.js"
 
 //export const audioElement = document.createElement("audio")

@@ -1,9 +1,7 @@
-import { audioElement, urlImgSong, elemMyCanvas } from "./initialization.js"
+import { urlImgSong } from "./initialization.js"
 import { track, gainNode, pannerStereo } from "./main.js"
-import { toogleAnimation } from "./events.js"
-import { randomNumber, randomColor, imageInCanvas } from "./functions.js"
+import { randomNumber, imageInCanvas } from "./functions.js"
 import { WIDTH, HEIGHT } from "./graphic.js"
-import Microphone from "./microphone.js"
 
 
 //  Function Analyser Amplitude: analyserAmp()
@@ -74,24 +72,23 @@ export default function analyserAmp(parContCanvas, parCanvas, parCtxCanvas, parM
         parCanvas.style.filter = 'blur(0px) contrast(3)'
         toogleCircleBtn.style.display = 'none'
         visualizerSine(bufferLength, x)
-        // visualizerBars(bufferLength, x)
         break;
-      case "Hell Doom":
-        toogleCircleBtn.style.display = 'none'
-        visualizatorHell(bufferLength, x)
-        break
-      case "Fireworks":
-        toogleCircleBtn.style.display = 'none'
-        visualizatorFirework(bufferLength, x)
-        break
-      case "Circles Rainbow":
-        toogleCircleBtn.style.display = 'block'
-        visualizatorCircles(bufferLength)
-        // visualizator2(bufferLength)
-        break
-      case "no se":
-        toogleCircleBtn.style.display = 'none'
-        break
+      // case "Hell Doom":
+      //   toogleCircleBtn.style.display = 'none'
+      //   visualizatorHell(bufferLength, x)
+      //   break
+      // case "Fireworks":
+      //   toogleCircleBtn.style.display = 'none'
+      //   visualizatorFirework(bufferLength, x)
+      //   break
+      // case "Circles Rainbow":
+      //   toogleCircleBtn.style.display = 'block'
+      //   visualizatorCircles(bufferLength)
+      //   // visualizator2(bufferLength)
+      //   break
+      // case "no se":
+      //   toogleCircleBtn.style.display = 'none'
+      //   break
       default:
       // code block
     }
@@ -149,7 +146,7 @@ export default function analyserAmp(parContCanvas, parCanvas, parCtxCanvas, parM
     for (let i = 0; i < bufferLength; i++) {
       const barHeight = dataArray[i] * 0.5
       const volume = (dataArray[i] / 128.0) - 1
-      
+
       const y = (volume * parCanvas.height) / 2
 
       const g = i * 1.5 / bufferLength
@@ -163,7 +160,7 @@ export default function analyserAmp(parContCanvas, parCanvas, parCtxCanvas, parM
       parCtxCanvas.fillRect(x, y, barWidth, y)
 
       x += barWidth;
-    }    
+    }
   }
   drawAmplitudeSound()
 }

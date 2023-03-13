@@ -119,7 +119,7 @@ export function imageInCanvas(urlImg, parCtx) {
   }
 }
 
-//  Set Song info
+//  Set song info
 export function setInfoSong(parIndexSong, parJSON_OFSongs, parElemImage, parElemVocals, parElemTitleSong,
   parElemInfoAlbum, parYear, parElemInfoDuration, parCtxCanvas) {
 
@@ -143,5 +143,29 @@ export function setInfoSong(parIndexSong, parJSON_OFSongs, parElemImage, parElem
   } else {
     console.error('Error:  The argument "parIndexSong" of the function "setInfoSong" must be a integer number, and parJSON_OFSongs an array of songs!')
   }
+}
+
+//  Config ini canvas
+// export function configCanvas(parIdCanvas, parCtxCanvas) {
+//   const myCanvas = document.querySelector(parIdCanvas)
+
+//   parCtxCanvas.reset()
+//   parCtxCanvas.fillStyle = 'rgb(0, 0, 0)';
+//   parCtxCanvas.fillRect(0, 0, myCanvas.width, myCanvas.height);
+// }
+
+//  Create element HTML intro DOM (parent is parElemtCont) => createElement
+export function createElemInDOM(parElemtCont, parElement, parId, parClass) {
+  const elemCont = document.createElement(parElement)
+  elemCont.setAttribute("id", parId)
+  elemCont.classList.add(parClass)
+
+  parElemtCont.appendChild(elemCont)
+}
+
+//  Delete element HTML from DOM => remove()
+export function deleteElemFromDOM(parIdElement) {
+  const elemInDOM = document.querySelector('#' + parIdElement)
+  elemInDOM.remove()
 }
 
